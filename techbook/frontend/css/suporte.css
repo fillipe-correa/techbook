@@ -1,0 +1,13 @@
+.support-layout {
+  padding: 20px 0;
+}
+
+.support-panel {
+  padding: 32px;
+}
+
+.support-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}

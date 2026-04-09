@@ -1,0 +1,138 @@
+.catalog-page,
+.book-detail,
+.reservation-layout {
+  padding: 16px 0 12px;
+}
+
+.catalog-toolbar {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.search-box {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.book-detail {
+  display: grid;
+  gap: 24px;
+}
+
+.book-panel {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 30px;
+  padding: 32px;
+}
+
+.book-panel .book-cover {
+  aspect-ratio: 0.68;
+}
+
+.book-panel h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.book-panel .book-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 26px 0;
+}
+
+.book-panel .description {
+  color: var(--ink-700);
+  line-height: 1.8;
+}
+
+.reservation-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+}
+
+.profile-menu {
+  padding: 24px;
+  height: fit-content;
+  display: grid;
+  gap: 12px;
+}
+
+.profile-menu a,
+.profile-menu button {
+  background: #f3f5f8;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+  color: var(--ink-700);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-menu .active {
+  background: rgba(22, 142, 234, 0.16);
+  color: var(--blue-900);
+}
+
+.reservation-panel {
+  padding: 28px;
+}
+
+.stack-list {
+  display: grid;
+  gap: 18px;
+}
+
+.reservation-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  padding: 18px;
+  border-radius: 22px;
+  background: #f9fbfe;
+  border: 1px solid var(--line);
+}
+
+.reservation-card img {
+  width: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.status-chip {
+  display: inline-flex;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.status-chip.success {
+  color: white;
+  background: var(--success);
+}
+
+.status-chip.neutral {
+  color: white;
+  background: #7b7f89;
+}
+
+.status-chip.alert {
+  color: white;
+  background: #d97706;
+}
+
+@media (max-width: 900px) {
+  .catalog-toolbar,
+  .book-panel,
+  .reservation-layout,
+  .reservation-card {
+    grid-template-columns: 1fr;
+  }
+}

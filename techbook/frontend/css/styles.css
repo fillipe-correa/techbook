@@ -1,0 +1,811 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #eef4ff;
+  --bg-soft: #f7fbff;
+  --white: #ffffff;
+  --primary: #5fa2da;
+  --primary-2: #7ec4ff;
+  --primary-dark: #1d3357;
+  --text: #24324a;
+  --muted: #64748b;
+  --shadow: 0 20px 60px rgba(22, 34, 63, 0.12);
+  --shadow-hover: 0 25px 70px rgba(22, 34, 63, 0.18);
+  --radius: 24px;
+  --radius-sm: 16px;
+  --transition: 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(95,162,218,0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(29,51,87,0.14), transparent 25%),
+    linear-gradient(180deg, #f7fbff 0%, #edf4ff 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =========================
+   HEADER / NAV GLOBAL
+========================= */
+header,
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(18px);
+  background: rgba(29, 51, 87, 0.82);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 18px 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 34px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  color: white;
+}
+
+.logo-text strong {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.logo-text span {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+nav,
+.nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+nav a,
+.nav a {
+  color: rgba(255,255,255,0.92);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  transition: var(--transition);
+}
+
+nav a::after,
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #aee1ff;
+  transition: width 0.3s ease;
+}
+
+nav a:hover,
+.nav a:hover {
+  color: white;
+}
+
+nav a:hover::after,
+.nav a:hover::after {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+.ghost-btn,
+.primary-btn,
+.btn {
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ghost-btn {
+  padding: 13px 20px;
+  color: white;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.28);
+}
+
+.ghost-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.16);
+}
+
+.primary-btn,
+.btn {
+  padding: 14px 24px;
+  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  box-shadow: 0 15px 35px rgba(29, 51, 87, 0.22);
+}
+
+.primary-btn:hover,
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(29, 51, 87, 0.3);
+}
+
+.small {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.full {
+  width: 100%;
+}
+
+/* =========================
+   HERO INDEX
+========================= */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(85,155,214,0.90) 0%, rgba(85,155,214,0.75) 34%, rgba(24,31,43,0.18) 55%, rgba(0,0,0,0.52) 100%),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  top: -100px;
+  left: -100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.10);
+  filter: blur(10px);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -60px;
+  bottom: -60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  filter: blur(8px);
+}
+
+.overlay-left {
+  position: absolute;
+  left: -80px;
+  top: 220px;
+  width: 180px;
+  height: 180px;
+  border: 4px solid rgba(161,255,244,0.8);
+  border-radius: 50%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 50%;
+  padding-left: 64px;
+  padding-top: 90px;
+  animation: fadeUp 0.9s ease both;
+}
+
+.hero-content h1 {
+  font-size: 92px;
+  line-height: 0.9;
+  font-weight: 300;
+  margin-bottom: 28px;
+  color: white;
+  text-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.hero-content h1 span {
+  color: #172559;
+  font-weight: 800;
+}
+
+.hero-content p {
+  max-width: 460px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 30px;
+}
+
+.socials {
+  display: flex;
+  gap: 14px;
+  font-size: 24px;
+  margin-top: 42px;
+  color: white;
+  opacity: 0.88;
+}
+
+.floating-controls {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 3;
+}
+
+.floating-controls button {
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.floating-controls button:hover {
+  transform: scale(1.06);
+}
+
+/* =========================
+   BANNER QUEM SOMOS
+========================= */
+.banner {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 120px 20px 100px;
+  color: white;
+  background:
+    linear-gradient(135deg, rgba(95,162,218,0.95), rgba(29,51,87,0.96)),
+    url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  top: -100px;
+  left: -100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  filter: blur(10px);
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -60px;
+  bottom: -60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  filter: blur(8px);
+}
+
+.banner h2 {
+  position: relative;
+  z-index: 1;
+  font-size: 64px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 0 8px 30px rgba(0,0,0,0.22);
+}
+
+.banner p {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 19px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.92);
+}
+
+/* =========================
+   SEÇÕES GERAIS
+========================= */
+.container,
+.catalog-section,
+.info-section {
+  max-width: 1180px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.catalog-section,
+.info-section {
+  color: var(--text);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.section-title h2,
+.info-section h3,
+.about-box h3 {
+  color: var(--primary-dark);
+}
+
+/* =========================
+   BOXES / ABOUT
+========================= */
+.about-box,
+.info-section > div {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: var(--radius);
+  padding: 34px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.about-box:hover,
+.info-section > div:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.about-box h3,
+.info-section h3 {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.about-box p,
+.info-section p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.info-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* =========================
+   CARDS
+========================= */
+.cards,
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.card,
+.book-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,250,255,0.96));
+  border: 1px solid rgba(95,162,218,0.14);
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card::before,
+.book-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(95,162,218,0.08), transparent 45%, rgba(29,51,87,0.06));
+  opacity: 0;
+  transition: 0.35s ease;
+}
+
+.card:hover,
+.book-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+.card:hover::before,
+.book-card:hover::before {
+  opacity: 1;
+}
+
+.card {
+  padding: 30px 24px;
+  text-align: center;
+}
+
+.card h4,
+.book-card h4 {
+  position: relative;
+  z-index: 1;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+}
+
+.card h4 {
+  font-size: 22px;
+}
+
+.card p {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* =========================
+   BOOK CARD
+========================= */
+.book-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+}
+
+.book-card .content {
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.book-card h4 {
+  font-size: 22px;
+}
+
+.book-card p {
+  color: var(--muted);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 19, 31, 0.65);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 2000;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255,255,255,0.95);
+  color: var(--primary-dark);
+  padding: 30px;
+  border-radius: 24px;
+  position: relative;
+  box-shadow: var(--shadow-hover);
+  animation: fadeUp 0.35s ease;
+}
+
+.modal-content h2 {
+  margin-bottom: 18px;
+  font-size: 28px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  border: 1px solid #d9e3ef;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 15px;
+  outline: none;
+  transition: var(--transition);
+  background: white;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(95,162,218,0.12);
+}
+
+.modal-content textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+/* =========================
+   MESSAGE
+========================= */
+.message {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: var(--primary-dark);
+  color: white;
+  padding: 14px 18px;
+  border-radius: 14px;
+  display: none;
+  z-index: 3000;
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  margin-top: 70px;
+  padding: 28px 20px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, #16243f, #1d3357);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+.about-box,
+.card,
+.book-card,
+.info-section > div,
+.hero-content {
+  animation: fadeUp 0.8s ease both;
+}
+
+.card:nth-child(2),
+.book-card:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.card:nth-child(3),
+.book-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 900px) {
+  header,
+  .topbar {
+    padding: 18px 20px;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .hero-content {
+    width: 100%;
+    padding: 180px 24px 80px;
+  }
+
+  .hero-content h1 {
+    font-size: 64px;
+  }
+
+  .banner {
+    padding: 90px 16px 80px;
+  }
+
+  .banner h2 {
+    font-size: 42px;
+  }
+
+  .banner p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .floating-controls {
+    right: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  header h1,
+  .logo-text strong {
+    font-size: 22px;
+  }
+
+  .logo-text span {
+    font-size: 13px;
+  }
+
+  nav,
+  .nav {
+    gap: 14px;
+  }
+
+  nav a,
+  .nav a {
+    font-size: 13px;
+  }
+
+  .hero-content h1 {
+    font-size: 46px;
+  }
+
+  .banner h2 {
+    font-size: 34px;
+  }
+
+  .about-box h3,
+  .info-section h3 {
+    font-size: 23px;
+  }
+
+  .card h4,
+  .book-card h4 {
+    font-size: 20px;
+  }
+
+  .about-box,
+  .info-section > div,
+  .modal-content {
+    padding: 24px;
+  }
+
+  /* =========================
+   FILTROS DO CATÁLOGO
+========================= */
+.filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 14px;
+  margin: 24px 0 30px;
+}
+
+.filters input,
+.filters select {
+  width: 100%;
+  border: 1px solid #d9e3ef;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 15px;
+  outline: none;
+  transition: var(--transition);
+  background: rgba(255,255,255,0.95);
+  color: var(--text);
+  box-shadow: 0 8px 20px rgba(22, 34, 63, 0.06);
+}
+
+.filters input:focus,
+.filters select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(95,162,218,0.12);
+}
+
+.filters button {
+  min-height: 50px;
+  white-space: nowrap;
+}
+
+/* texto quando não encontrar livros */
+.empty-state {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(95,162,218,0.14);
+  border-radius: 22px;
+  padding: 24px;
+  color: var(--muted);
+  box-shadow: var(--shadow);
+}
+
+/* melhora título da seção do catálogo */
+.catalog-section .section-title {
+  margin-bottom: 10px;
+}
+
+/* deixa cards do catálogo mais bonitos */
+.book-card .content p strong {
+  color: var(--primary-dark);
+}
+
+/* responsivo dos filtros */
+@media (max-width: 900px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .filters button {
+    width: 100%;
+  }
+}
+}

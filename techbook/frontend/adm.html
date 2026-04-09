@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechBook | Painel Administrativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/adm.css">
+</head>
+<body data-page="admin">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-mark">📘</span>
+        <div>
+          <strong>TECHBOOK</strong>
+          <p>Painel Administrativo</p>
+        </div>
+      </div>
+      <nav class="admin-nav">
+        <a href="#dashboard">Visão geral</a>
+        <a href="#emprestimos">Registrar empréstimo</a>
+        <a href="#devolucoes">Registrar devolução</a>
+        <a href="#atrasos">Verificar atrasos</a>
+        <a href="#livros">Consultar livro</a>
+        <a href="#usuarios">Consultar usuários</a>
+        <a href="#gestao">Gerenciar livro</a>
+      </nav>
+      <div class="sidebar-user">
+        <strong>Administrador</strong>
+        <span>Controle de acervo</span>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <section class="admin-hero" id="dashboard">
+        <div>
+          <p class="eyebrow">Dashboard</p>
+          <h1>Painel do administrador</h1>
+          <p>Gerencie livros, empréstimos, devoluções e usuários em um só lugar.</p>
+        </div>
+        <div class="topbar-actions">
+          <a class="button ghost" href="index.html">Voltar ao site</a>
+          <button class="button primary" id="refreshDashboard" type="button">Atualizar painel</button>
+        </div>
+      </section>
+
+      <section class="admin-banner">
+        <p>Visualize empréstimos ativos, confirme retiradas, registre devoluções, acompanhe atrasos e controle a disponibilidade do acervo.</p>
+        <div class="pill-row">
+          <span>Cadastrar livro</span>
+          <span>Atualizar livro</span>
+          <span>Remover livro</span>
+          <span>Confirmar retirada</span>
+          <span>Registrar devolução</span>
+          <span>Verificar atrasos</span>
+        </div>
+      </section>
+
+      <section class="metric-grid">
+        <article class="metric-card"><span>Total de livros</span><strong id="metricBooks">0</strong><small>Livros cadastrados</small></article>
+        <article class="metric-card"><span>Empréstimos ativos</span><strong id="metricLoans">0</strong><small>Retiradas em andamento</small></article>
+        <article class="metric-card"><span>Atrasados</span><strong id="metricLate">0</strong><small>Devoluções pendentes</small></article>
+        <article class="metric-card"><span>Usuários</span><strong id="metricUsers">0</strong><small>Leitores cadastrados</small></article>
+      </section>
+
+      <section class="admin-grid">
+        <article class="panel" id="emprestimos">
+          <div class="panel-heading">
+            <h2>Confirmar retirada e empréstimo</h2>
+          </div>
+          <form id="loanForm" class="form-grid">
+            <input type="number" id="loanReservationId" placeholder="ID da reserva" required>
+            <input type="number" id="loanAdminId" placeholder="ID do administrador" value="1" required>
+            <button class="button primary" type="submit">Registrar empréstimo</button>
+          </form>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Livro</th>
+                  <th>Prazo</th>
+                  <th>Status</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="loanTable"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel" id="devolucoes">
+          <div class="panel-heading">
+            <h2>Registrar devolução</h2>
+          </div>
+          <form id="returnForm" class="form-grid">
+            <input type="number" id="returnLoanId" placeholder="ID do empréstimo" required>
+            <input type="number" id="returnAdminId" placeholder="ID do administrador" value="1" required>
+            <select id="returnBookState">
+              <option value="BOM">Livro em bom estado</option>
+              <option value="AVARIADO">Livro com avaria</option>
+            </select>
+            <button class="button primary" type="submit">Registrar devolução</button>
+          </form>
+        </article>
+
+        <article class="panel" id="atrasos">
+          <div class="panel-heading">
+            <h2>Verificar atrasos</h2>
+          </div>
+          <div id="lateList" class="status-list"></div>
+        </article>
+
+        <article class="panel" id="usuarios">
+          <div class="panel-heading">
+            <h2>Clientes cadastrados</h2>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>E-mail</th>
+                  <th>Telefone</th>
+                </tr>
+              </thead>
+              <tbody id="userTable"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel wide-panel" id="gestao">
+        <div class="panel-heading">
+          <h2>Cadastro e atualização de livros</h2>
+        </div>
+        <form id="bookForm" class="form-grid large">
+          <input type="hidden" id="bookId">
+          <input type="text" id="bookTitle" placeholder="Título" required>
+          <input type="text" id="bookAuthor" placeholder="Autor" required>
+          <input type="text" id="bookCategory" placeholder="Categoria" required>
+          <input type="number" id="bookTotal" placeholder="Quantidade total" required>
+          <input type="number" id="bookAvailable" placeholder="Quantidade disponível" required>
+          <input type="url" id="bookImage" placeholder="Imagem da capa">
+          <textarea id="bookDescription" placeholder="Descrição do livro" rows="5" required></textarea>
+          <div class="button-row">
+            <button class="button primary" type="submit">Cadastrar / Atualizar</button>
+            <button class="button danger" id="deleteBookButton" type="button">Excluir selecionado</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel wide-panel" id="livros">
+        <div class="panel-heading">
+          <h2>Consultar livros</h2>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Seleção</th>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Categoria</th>
+                <th>Quantidade</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bookTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/adm.js"></script>
+</body>
+</html>
