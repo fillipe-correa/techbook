@@ -10,73 +10,172 @@
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/quemsomos.css">
 </head>
-<body data-page="about">
-  <header class="site-header">
-    <a class="brand" href="index.html"><span class="brand-mark">📘</span><span>TECHBOOK</span></a>
-    <nav class="site-nav">
-      <a href="quemsomos.html">Quem somos</a>
-      <a href="catalogo.html">Catálogo</a>
-      <a href="comofunciona.html">Como funciona</a>
-      <a href="suporte.html">Suporte</a>
-    </nav>
-    <div class="site-actions" id="authArea"></div>
-  </header>
+<body data-page="about" class="about-page">
+  <div class="about-hero-wrap">
+    <header class="site-header app-header about-header">
+      <a class="brand about-brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <path d="M10 14c9 0 16 3 22 10v31c-6-7-13-10-22-10V14Z" />
+            <path d="M54 14c-9 0-16 3-22 10v31c6-7 13-10 22-10V14Z" />
+            <path d="M32 24c-5-6-12-10-20-12" />
+            <path d="M32 24c5-6 12-10 20-12" />
+            <path d="M33 54c2-17 10-29 22-36" />
+            <path d="M30 54c-2-17-10-29-22-36" />
+          </svg>
+        </span>
+        <span>TECHBOOK</span>
+      </a>
+      <nav class="site-nav about-nav">
+        <a href="quemsomos.html">Quem somos</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="comofunciona.html">Como funciona</a>
+        <a href="suporte.html">Suporte</a>
+      </nav>
+      <div class="site-actions about-actions" id="authArea"></div>
+    </header>
 
-  <main class="content-page">
-    <section class="headline-panel">
-      <div>
-        <p class="eyebrow">Quem somos</p>
-        <h1>TechForce e TechBook em uma solução de leitura acessível.</h1>
+    <section class="about-banner">
+      <div class="about-banner-inner">
+        <span class="about-banner-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <path d="M10 14c9 0 16 3 22 10v31c-6-7-13-10-22-10V14Z" />
+            <path d="M54 14c-9 0-16 3-22 10v31c6-7 13-10 22-10V14Z" />
+            <path d="M32 24c-5-6-12-10-20-12" />
+            <path d="M32 24c5-6 12-10 20-12" />
+            <path d="M33 54c2-17 10-29 22-36" />
+            <path d="M30 54c-2-17-10-29-22-36" />
+          </svg>
+        </span>
+        <h1>TECHBOOK</h1>
+      </div>
+    </section>
+  </div>
+
+  <main class="about-content">
+    <section class="about-intro">
+      <div class="about-copy">
+        <h2>QUEM SOMOS</h2>
         <p>
-          A TechBook nasceu para reduzir barreiras de acesso a livros, organizar o acervo e
-          tornar o processo de reserva, retirada e devolução mais simples para leitores e administradores.
+          A TECHBOOK é uma iniciativa desenvolvida pela TECHFORCE, empresa de tecnologia
+          especializada na criação de soluções digitais modernas e eficientes.
+        </p>
+        <p>
+          A iniciativa surgiu com o propósito de transformar o acesso à leitura, tornando-o
+          mais simples, acessível e eficiente. Voltada principalmente para estudantes e
+          leitores frequentes, a TECHBOOK oferece uma alternativa ao alto custo dos livros
+          e à dificuldade de acesso a diversas obras.
+        </p>
+        <p>
+          Por meio de uma plataforma digital, permite que usuários pesquisem, reservem
+          e realizem empréstimos de livros de forma prática e organizada, aproximando
+          pessoas do conhecimento e incentivando o hábito da leitura.
         </p>
       </div>
-      <div class="floating-badge">Leitura, conexão e reaproveitamento.</div>
+
+      <div class="about-photo-card">
+        <img src="img/hero.png" alt="Leitora com livro">
+      </div>
     </section>
 
-    <section class="about-grid">
-      <article class="info-card">
-        <h2>Nossa missão</h2>
-        <p>Entregar uma experiência simples e eficiente, usando tecnologia para aproximar pessoas da leitura.</p>
-      </article>
-      <article class="info-card">
-        <h2>Nosso propósito</h2>
-        <p>Ampliar o acesso ao conhecimento, incentivar a leitura e promover o uso consciente do acervo.</p>
-      </article>
-      <article class="info-card wide">
-        <h2>O que queremos construir</h2>
-        <div class="pill-row">
-          <span>+ Leitura</span>
-          <span>+ Acesso</span>
-          <span>+ Conexão</span>
-        </div>
+    <section class="mission-grid">
+      <article class="mission-card">
+        <h3>NOSSA MISSÃO</h3>
         <p>
-          Um catálogo vivo, com reserva online, retirada presencial organizada e um painel
-          capaz de acompanhar empréstimos, devoluções e atrasos sem ruído operacional.
+          Proporcionar uma experiência simples e eficiente no acesso aos livros,
+          utilizando a tecnologia para aproximar pessoas do conhecimento.
+        </p>
+      </article>
+
+      <article class="mission-card">
+        <h3>NOSSA PROPOSTA</h3>
+        <p>
+          Ampliar o acesso à leitura e ao conhecimento, oferecendo uma solução
+          prática, acessível e eficiente que incentive o hábito de ler.
         </p>
       </article>
     </section>
 
-    <section class="cta-banner">
-      <div>
-        <p class="eyebrow">Faça parte</p>
-        <h2>Descubra histórias incríveis no acervo da TechBook.</h2>
+    <section class="build-section">
+      <header class="build-heading">
+        <h2>O QUE QUEREMOS CONSTRUIR</h2>
+        <p>Criamos uma experiência prática e eficiente para facilitar o acesso aos livros.</p>
+      </header>
+
+      <div class="build-grid">
+        <article class="build-card">
+          <h3>+ Leitura</h3>
+          <p>Incentivamos o contato diário com livros.</p>
+        </article>
+        <article class="build-card">
+          <h3>+ Acesso</h3>
+          <p>Tornamos o universo literário mais simples.</p>
+        </article>
+        <article class="build-card">
+          <h3>+ Conexão</h3>
+          <p>Unimos leitores e experiências.</p>
+        </article>
       </div>
-      <a class="button primary" href="catalogo.html">Ver catálogo</a>
+    </section>
+
+    <section class="about-cta">
+      <div class="about-cta-copy">
+        <span class="about-cta-chip">FAÇA PARTE</span>
+        <h2>Descubra histórias incríveis!</h2>
+        <p>Explore nosso catálogo.</p>
+      </div>
+      <a class="about-cta-button" href="catalogo.html">VER CATÁLOGO</a>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div>
-      <strong>TECHBOOK</strong>
-      <p>Projeto TechForce para consulta, reserva e empréstimo de livros.</p>
-    </div>
-    <div>
-      <strong>Redes sociais</strong>
-      <p>Twitter</p>
-      <p>Facebook</p>
-      <p>Instagram</p>
+  <footer class="app-footer">
+    <div class="app-footer-inner">
+      <div class="app-footer-brand">
+        <a class="footer-brand-link" href="index.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img">
+              <path d="M10 14c9 0 16 3 22 10v31c-6-7-13-10-22-10V14Z" />
+              <path d="M54 14c-9 0-16 3-22 10v31c6-7 13-10 22-10V14Z" />
+              <path d="M32 24c-5-6-12-10-20-12" />
+              <path d="M32 24c5-6 12-10 20-12" />
+              <path d="M33 54c2-17 10-29 22-36" />
+              <path d="M30 54c-2-17-10-29-22-36" />
+            </svg>
+          </span>
+          <span>TECHBOOK</span>
+        </a>
+      </div>
+
+      <div class="footer-column">
+        <h3>REDES SOCIAIS</h3>
+        <div class="social-links" aria-label="Redes sociais">
+          <a href="#" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.2 1.8-2.1-.8.5-1.7.8-2.6 1-1.4-1.5-3.8-1.6-5.4-.2-1 .8-1.5 2.1-1.3 3.4-3-.1-5.9-1.6-7.8-4C3.4 6.1 3.8 8 5 9c-.6 0-1.2-.2-1.7-.5 0 2 1.4 3.8 3.4 4.2-.6.2-1.2.2-1.8.1.5 1.7 2.1 2.9 3.9 2.9A7.9 7.9 0 0 1 3 17.3a11.2 11.2 0 0 0 6 1.8c7.3 0 11.5-6.3 11.3-11.9.8-.6 1.4-1.3 1.7-2.2Z" />
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.2-1.5 1.5-1.5h1.5V5a20 20 0 0 0-2.2-.1c-2.2 0-3.8 1.4-3.8 4V11H8v3h2.5v7h3Z" />
+            </svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" role="img">
+              <rect x="4" y="4" width="16" height="16" rx="4" />
+              <circle cx="12" cy="12" r="3.6" />
+              <circle cx="17.3" cy="6.7" r="1" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>INSTITUCIONAL</h3>
+        <a href="quemsomos.html">• Quem somos</a>
+        <a href="catalogo.html">• Catálogo</a>
+        <a href="comofunciona.html">• Como funciona</a>
+        <a href="suporte.html">• Suporte</a>
+      </div>
     </div>
   </footer>
 

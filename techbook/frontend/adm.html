@@ -13,24 +13,36 @@
   <div class="admin-layout">
     <aside class="admin-sidebar">
       <div class="sidebar-brand">
-        <span class="brand-mark">📘</span>
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <path d="M10 14c9 0 16 3 22 10v31c-6-7-13-10-22-10V14Z" />
+            <path d="M54 14c-9 0-16 3-22 10v31c6-7 13-10 22-10V14Z" />
+            <path d="M32 24c-5-6-12-10-20-12" />
+            <path d="M32 24c5-6 12-10 20-12" />
+            <path d="M33 54c2-17 10-29 22-36" />
+            <path d="M30 54c-2-17-10-29-22-36" />
+          </svg>
+        </span>
         <div>
           <strong>TECHBOOK</strong>
           <p>Painel Administrativo</p>
         </div>
       </div>
+
       <nav class="admin-nav">
         <a href="#dashboard">Visão geral</a>
-        <a href="#emprestimos">Registrar empréstimo</a>
+        <a href="#regras">Regras operacionais</a>
+        <a href="#reservas">Reservas pendentes</a>
+        <a href="#emprestimos">Empréstimos ativos</a>
         <a href="#devolucoes">Registrar devolução</a>
-        <a href="#atrasos">Verificar atrasos</a>
-        <a href="#livros">Consultar livro</a>
-        <a href="#usuarios">Consultar usuários</a>
-        <a href="#gestao">Gerenciar livro</a>
+        <a href="#historico">Histórico de devoluções</a>
+        <a href="#usuarios">Clientes cadastrados</a>
+        <a href="#gestao">Gerenciar livros</a>
       </nav>
+
       <div class="sidebar-user">
         <strong>Administrador</strong>
-        <span>Controle de acervo</span>
+        <span>Controle completo do acervo</span>
       </div>
     </aside>
 
@@ -39,7 +51,10 @@
         <div>
           <p class="eyebrow">Dashboard</p>
           <h1>Painel do administrador</h1>
-          <p>Gerencie livros, empréstimos, devoluções e usuários em um só lugar.</p>
+          <p>
+            Acompanhe reservas, empréstimos, atrasos, devoluções e disponibilidade
+            do catálogo conforme o fluxo definido na documentação da TechBook.
+          </p>
         </div>
         <div class="topbar-actions">
           <a class="button ghost" href="index.html">Voltar ao site</a>
@@ -48,14 +63,17 @@
       </section>
 
       <section class="admin-banner">
-        <p>Visualize empréstimos ativos, confirme retiradas, registre devoluções, acompanhe atrasos e controle a disponibilidade do acervo.</p>
+        <p>
+          O administrador confirma retiradas, registra devoluções, monitora atrasos,
+          gerencia os livros e acompanha o limite operacional da plataforma.
+        </p>
         <div class="pill-row">
-          <span>Cadastrar livro</span>
-          <span>Atualizar livro</span>
-          <span>Remover livro</span>
-          <span>Confirmar retirada</span>
-          <span>Registrar devolução</span>
-          <span>Verificar atrasos</span>
+          <span>Até 3 empréstimos por cliente</span>
+          <span>Reserva por 1 dia</span>
+          <span>Empréstimo de 14 dias</span>
+          <span>1 renovação por 7 dias</span>
+          <span>Controle de atraso</span>
+          <span>Baixa de devolução</span>
         </div>
       </section>
 
@@ -64,15 +82,72 @@
         <article class="metric-card"><span>Empréstimos ativos</span><strong id="metricLoans">0</strong><small>Retiradas em andamento</small></article>
         <article class="metric-card"><span>Atrasados</span><strong id="metricLate">0</strong><small>Devoluções pendentes</small></article>
         <article class="metric-card"><span>Usuários</span><strong id="metricUsers">0</strong><small>Leitores cadastrados</small></article>
+        <article class="metric-card"><span>Reservas pendentes</span><strong id="metricReservations">0</strong><small>Aguardando retirada</small></article>
+        <article class="metric-card"><span>Livros disponíveis</span><strong id="metricAvailableBooks">0</strong><small>Prontos para reservar</small></article>
+        <article class="metric-card"><span>Livros indisponíveis</span><strong id="metricUnavailableBooks">0</strong><small>Sem unidade livre</small></article>
+      </section>
+
+      <section class="panel" id="regras">
+        <div class="panel-heading">
+          <h2>Regras operacionais da documentação</h2>
+        </div>
+        <div class="rules-doc-grid">
+          <article class="doc-card">
+            <h3>Reserva</h3>
+            <p>O livro fica reservado por até 24 horas para retirada presencial.</p>
+          </article>
+          <article class="doc-card">
+            <h3>Limite</h3>
+            <p>Cada cliente pode manter no máximo 3 empréstimos ativos ou atrasados.</p>
+          </article>
+          <article class="doc-card">
+            <h3>Prazo</h3>
+            <p>O empréstimo é criado com prazo padrão de 14 dias.</p>
+          </article>
+          <article class="doc-card">
+            <h3>Renovação</h3>
+            <p>A renovação pode ser feita apenas uma vez e não é permitida em atraso.</p>
+          </article>
+          <article class="doc-card">
+            <h3>Devolução</h3>
+            <p>Na devolução, o administrador informa o estado do livro: bom ou avariado.</p>
+          </article>
+          <article class="doc-card">
+            <h3>Status do acervo</h3>
+            <p>O sistema atualiza automaticamente disponibilidade, reservas e devoluções.</p>
+          </article>
+        </div>
       </section>
 
       <section class="admin-grid">
+        <article class="panel" id="reservas">
+          <div class="panel-heading">
+            <h2>Reservas pendentes e status</h2>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Livro</th>
+                  <th>Reserva</th>
+                  <th>Prazo retirada</th>
+                  <th>Status</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="reservationTable"></tbody>
+            </table>
+          </div>
+        </article>
+
         <article class="panel" id="emprestimos">
           <div class="panel-heading">
             <h2>Confirmar retirada e empréstimo</h2>
           </div>
           <form id="loanForm" class="form-grid">
-            <input type="number" id="loanReservationId" placeholder="ID da reserva" required>
+            <input type="number" id="loanReservationId" placeholder="ID da reserva pendente" required>
             <input type="number" id="loanAdminId" placeholder="ID do administrador" value="1" required>
             <button class="button primary" type="submit">Registrar empréstimo</button>
           </form>
@@ -83,8 +158,10 @@
                   <th>ID</th>
                   <th>Cliente</th>
                   <th>Livro</th>
+                  <th>Empréstimo</th>
                   <th>Prazo</th>
                   <th>Status</th>
+                  <th>Renovação</th>
                   <th>Ação</th>
                 </tr>
               </thead>
@@ -106,6 +183,16 @@
             </select>
             <button class="button primary" type="submit">Registrar devolução</button>
           </form>
+          <div class="helper-text">
+            Ao registrar a devolução, o livro volta para o acervo e o status do empréstimo muda para devolvido.
+          </div>
+        </article>
+
+        <article class="panel" id="historico">
+          <div class="panel-heading">
+            <h2>Histórico de devoluções e finalizados</h2>
+          </div>
+          <div id="returnHistory" class="status-list"></div>
         </article>
 
         <article class="panel" id="atrasos">
@@ -138,7 +225,7 @@
 
       <section class="panel wide-panel" id="gestao">
         <div class="panel-heading">
-          <h2>Cadastro e atualização de livros</h2>
+          <h2>Cadastro, atualização e exclusão de livros</h2>
         </div>
         <form id="bookForm" class="form-grid large">
           <input type="hidden" id="bookId">
@@ -158,7 +245,7 @@
 
       <section class="panel wide-panel" id="livros">
         <div class="panel-heading">
-          <h2>Consultar livros</h2>
+          <h2>Consultar livros e disponibilidade</h2>
         </div>
         <div class="table-shell">
           <table>

@@ -43,7 +43,9 @@
           <p>${app.escapeHtml(book.autor)}</p>
           <p>${app.escapeHtml(book.categoria)}</p>
           <p>${book.quantidadeDisponivel} exemplar(es) disponível(eis)</p>
-          <a class="button primary" href="livro.html?id=${book.id}">Reservar</a>
+          ${book.quantidadeDisponivel > 0
+            ? `<a class="button primary" href="livro.html?id=${book.id}">Reservar</a>`
+            : `<span class="button primary disabled">Indisponível</span>`}
         </article>
       `).join("");
       count.textContent = `${filtered.length} título(s)`;

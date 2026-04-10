@@ -64,6 +64,83 @@ select {
   padding: 18px 0;
 }
 
+.app-header-wrap {
+  background: #1490e8;
+}
+
+.app-header {
+  width: min(1240px, calc(100% - 48px));
+  padding: 18px 0 8px;
+}
+
+.app-header .brand,
+.app-header .site-nav,
+.app-header .site-nav a,
+.app-header .site-actions a,
+.app-header .site-actions button {
+  color: #ffffff;
+}
+
+.app-header .brand {
+  font-size: 1.05rem;
+}
+
+.app-header .brand-mark {
+  background: transparent;
+  display: inline-flex;
+  width: 54px;
+  height: 54px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-header .brand-mark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app-header .site-nav {
+  gap: 42px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.app-header .site-nav a.active,
+.app-header .site-nav a:hover {
+  color: #fef4d7;
+}
+
+.app-header .site-actions {
+  min-width: 112px;
+  justify-content: flex-end;
+}
+
+.app-header .site-actions .primary {
+  display: none;
+}
+
+.app-header .site-actions .ghost {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.app-header .site-actions .ghost::before {
+  content: "👤";
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -127,8 +204,8 @@ select {
 .button.primary,
 .site-actions .primary {
   color: white;
-  background: linear-gradient(135deg, var(--blue-700), var(--blue-800));
-  box-shadow: var(--shadow);
+  background: linear-gradient(180deg, #28a8f3 0%, #1490e8 100%);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.05), 0 10px 16px rgba(0, 0, 0, 0.14);
 }
 
 .button.secondary {
@@ -189,6 +266,8 @@ select {
 .auth-card h1 {
   margin: 0;
   font-size: clamp(1.8rem, 3vw, 3rem);
+  color: #148de7;
+  font-weight: 800;
 }
 
 .site-footer {
@@ -208,6 +287,91 @@ select {
 .site-footer strong {
   display: block;
   margin: 6px 0;
+}
+
+.app-footer {
+  margin-top: 54px;
+  background: #1490e8;
+  color: #ffffff;
+}
+
+.app-footer-inner {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 44px 0 60px;
+  display: grid;
+  grid-template-columns: 1.25fr 0.8fr 0.8fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.app-footer .footer-brand-link,
+.app-footer .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff8ea;
+  font-size: clamp(2.1rem, 4vw, 3.5rem);
+  font-weight: 800;
+}
+
+.app-footer .brand-mark {
+  background: transparent;
+  display: inline-flex;
+  width: 54px;
+  height: 54px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-footer .brand-mark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app-footer .footer-column h3 {
+  margin: 0 0 16px;
+  color: #fff8ea;
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.app-footer .footer-column a {
+  display: block;
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+
+.app-footer .social-links {
+  display: flex;
+  gap: 20px;
+}
+
+.app-footer .social-links a {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+}
+
+.app-footer .social-links svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app-footer .social-links a:nth-child(1) svg path,
+.app-footer .social-links a:nth-child(2) svg path {
+  fill: currentColor;
+  stroke: none;
 }
 
 .book-grid {
@@ -282,5 +446,32 @@ select {
 
   .site-nav {
     gap: 14px;
+  }
+
+  .app-header {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .app-header .site-nav {
+    gap: 14px;
+    font-size: 0.8rem;
+  }
+
+  .app-footer-inner {
+    width: min(100%, calc(100% - 32px));
+    grid-template-columns: 1fr;
+  }
+
+  .app-footer .footer-brand-link,
+  .app-footer .footer-brand {
+    font-size: 2.2rem;
+  }
+
+  .app-footer .footer-column h3 {
+    font-size: 1.2rem;
+  }
+
+  .app-footer .footer-column a {
+    font-size: 1rem;
   }
 }

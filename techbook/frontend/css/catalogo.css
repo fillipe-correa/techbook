@@ -1,26 +1,244 @@
+.catalog-view-page {
+  background: #ffffff;
+}
+
+.catalog-top-wrap {
+  background: #1490e8;
+}
+
+.catalog-header {
+  width: min(1240px, calc(100% - 48px));
+  padding: 18px 0 8px;
+}
+
+.catalog-brand,
+.catalog-nav,
+.catalog-nav a,
+.catalog-actions a,
+.catalog-actions button {
+  color: #ffffff;
+}
+
+.catalog-brand {
+  font-size: 1.05rem;
+}
+
+.catalog-brand .brand-mark,
+.footer-brand-link .brand-mark {
+  background: transparent;
+  display: inline-flex;
+  width: 54px;
+  height: 54px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.catalog-brand .brand-mark svg,
+.footer-brand-link .brand-mark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.catalog-nav {
+  gap: 42px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.catalog-nav a.active,
+.catalog-nav a:hover {
+  color: #fef4d7;
+}
+
+.catalog-actions {
+  min-width: 112px;
+  justify-content: flex-end;
+}
+
+.catalog-actions .primary {
+  display: none;
+}
+
+.catalog-actions .ghost {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.catalog-actions .ghost::before {
+  content: "👤";
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
 .catalog-page,
 .book-detail,
 .reservation-layout {
-  padding: 16px 0 12px;
+  padding: 0 0 12px;
+}
+
+.catalog-filter-band {
+  margin-top: 52px;
+  background: #1490e8;
+  padding: 18px 0;
 }
 
 .catalog-toolbar {
+  width: min(880px, calc(100% - 48px));
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 16px;
-  padding: 20px;
-  margin-bottom: 24px;
+  grid-template-columns: 170px 1fr;
+  gap: 20px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.catalog-toolbar select,
+.search-box {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.04), 0 10px 16px rgba(0, 0, 0, 0.1);
+}
+
+.catalog-toolbar select {
+  border: 0;
+  padding: 0 48px 0 22px;
+  color: #777777;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #6f6f6f 50%),
+    linear-gradient(135deg, #6f6f6f 50%, transparent 50%);
+  background-position:
+    calc(100% - 34px) 50%,
+    calc(100% - 24px) 50%;
+  background-size: 10px 10px, 10px 10px;
+  background-repeat: no-repeat;
 }
 
 .search-box {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px;
+  grid-template-columns: 1fr 70px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.search-box input {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0 22px;
+  color: #666666;
+}
+
+.search-box button {
+  border: 0;
+  background: transparent;
+  color: #1490e8;
+  cursor: pointer;
+}
+
+.search-box button svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.catalog-results {
+  width: min(880px, calc(100% - 40px));
+  margin: 30px auto 0;
+}
+
+.catalog-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.catalog-count {
+  color: #7c7c7c;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.catalog-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 42px 30px;
+}
+
+.catalog-grid .book-card {
+  padding: 14px 14px 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #ededed;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.04), 0 8px 14px rgba(0, 0, 0, 0.1);
+}
+
+.catalog-grid .book-cover {
+  aspect-ratio: 0.72;
+  border-radius: 8px;
+}
+
+.catalog-grid .book-card h3 {
+  margin: 12px 0 4px;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.catalog-grid .book-card p {
+  margin: 0 0 3px;
+  color: #5c5c5c;
+  font-size: 0.9rem;
+}
+
+.catalog-grid .book-card p:nth-of-type(2),
+.catalog-grid .book-card p:nth-of-type(3) {
+  display: none;
+}
+
+.catalog-grid .button.primary {
+  min-height: 38px;
+  padding: 0 18px;
+  margin-top: 10px;
+  background: #16a0f3;
+  box-shadow: none;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+}
+
+.catalog-grid .button.primary[href] {
+  width: fit-content;
+}
+
+.catalog-grid .button.primary.disabled {
+  display: inline-flex;
+  width: fit-content;
+  pointer-events: none;
 }
 
 .book-detail {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
   display: grid;
   gap: 24px;
+  padding-top: 16px;
 }
 
 .book-panel {
@@ -52,9 +270,12 @@
 }
 
 .reservation-layout {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 24px;
+  padding-top: 16px;
 }
 
 .profile-menu {
@@ -128,11 +349,128 @@
   background: #d97706;
 }
 
-@media (max-width: 900px) {
+.catalog-footer {
+  margin-top: 54px;
+  background: #1490e8;
+  color: #ffffff;
+}
+
+.catalog-footer-inner {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 44px 0 60px;
+  display: grid;
+  grid-template-columns: 1.25fr 0.8fr 0.8fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.footer-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff8ea;
+  font-size: clamp(2.1rem, 4vw, 3.5rem);
+  font-weight: 800;
+}
+
+.footer-column h3 {
+  margin: 0 0 16px;
+  color: #fff8ea;
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.footer-column a {
+  display: block;
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 20px;
+}
+
+.social-links a {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+}
+
+.social-links svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.social-links a:nth-child(1) svg path,
+.social-links a:nth-child(2) svg path {
+  fill: currentColor;
+  stroke: none;
+}
+
+@media (max-width: 980px) {
+  .catalog-header,
+  .catalog-footer-inner {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalog-footer-inner,
   .catalog-toolbar,
   .book-panel,
   .reservation-layout,
   .reservation-card {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .catalog-nav {
+    gap: 14px;
+    font-size: 0.8rem;
+  }
+
+  .catalog-filter-band {
+    margin-top: 28px;
+    padding: 14px 0;
+  }
+
+  .catalog-toolbar {
+    width: min(100%, calc(100% - 24px));
+    gap: 12px;
+  }
+
+  .catalog-results {
+    width: min(100%, calc(100% - 24px));
+  }
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .catalog-footer {
+    margin-top: 34px;
+  }
+
+  .footer-brand-link {
+    font-size: 2.2rem;
+  }
+
+  .footer-column h3 {
+    font-size: 1.2rem;
+  }
+
+  .footer-column a {
+    font-size: 1rem;
   }
 }

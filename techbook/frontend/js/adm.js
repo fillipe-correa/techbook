@@ -11,22 +11,57 @@
   loadDashboard();
 
   async function loadDashboard() {
-    const [dashboard, loans, users, books] = await Promise.all([
+    const [dashboard, loans, users, books, reservations] = await Promise.all([
       app.request("/administracao/dashboard"),
       app.request("/emprestimos"),
       app.request("/clientes"),
-      app.request("/livros")
+      app.request("/livros"),
+      app.request("/reservas")
     ]);
 
     document.getElementById("metricBooks").textContent = dashboard.totalLivros;
     document.getElementById("metricLoans").textContent = dashboard.emprestimosAtivos;
     document.getElementById("metricLate").textContent = dashboard.atrasados;
     document.getElementById("metricUsers").textContent = dashboard.usuarios;
+    document.getElementById("metricReservations").textContent = dashboard.reservasPendentes;
+    document.getElementById("metricAvailableBooks").textContent = dashboard.livrosDisponiveis;
+    document.getElementById("metricUnavailableBooks").textContent = dashboard.livrosIndisponiveis;
 
+    renderReservationTable(reservations);
     renderLoanTable(loans);
+    renderReturnHistory(loans.filter((loan) => loan.status === "DEVOLVIDO"));
     renderLateList(loans.filter((loan) => loan.status === "ATRASADO"));
     renderUsers(users);
     renderBooks(books);
+  }
+
+  function renderReservationTable(reservations) {
+    const rows = reservations
+      .sort((a, b) => b.id - a.id)
+      .map((reservation) => `
+        <tr>
+          <td>${reservation.id}</td>
+          <td>${app.escapeHtml(reservation.cliente.nome)}</td>
+          <td>${app.escapeHtml(reservation.livro.titulo)}</td>
+          <td>${app.formatDate(reservation.dataReserva)}</td>
+          <td>${app.formatDate(reservation.prazoRetirada)}</td>
+          <td>${app.escapeHtml(reservation.status)}</td>
+          <td>
+            ${reservation.status === "PENDENTE"
+              ? `<button class="button primary small" type="button" data-fill-reservation="${reservation.id}">Usar na retirada</button>`
+              : '<span class="inline-status">Sem ação</span>'}
+          </td>
+        </tr>
+      `).join("");
+
+    document.getElementById("reservationTable").innerHTML = rows || '<tr><td colspan="7">Nenhuma reserva encontrada.</td></tr>';
+
+    document.querySelectorAll("[data-fill-reservation]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.getElementById("loanReservationId").value = button.dataset.fillReservation;
+        document.getElementById("loanReservationId").focus();
+      });
+    });
   }
 
   function renderLoanTable(loans) {
@@ -35,9 +70,15 @@
         <td>${loan.id}</td>
         <td>${app.escapeHtml(loan.cliente.nome)}</td>
         <td>${app.escapeHtml(loan.livro.titulo)}</td>
+        <td>${app.formatDate(loan.dataEmprestimo)}</td>
         <td>${app.formatDate(loan.dataDevolucaoPrevista)}</td>
         <td>${app.escapeHtml(loan.status)}</td>
-        <td><button class="button ghost" type="button" data-renew-loan="${loan.id}">Renovar</button></td>
+        <td>${loan.renovado ? "Ja renovado" : "Disponivel"}</td>
+        <td>
+          ${loan.status === "ATIVO" && !loan.renovado
+            ? `<button class="button ghost" type="button" data-renew-loan="${loan.id}">Renovar</button>`
+            : '<span class="inline-status">Sem ação</span>'}
+        </td>
       </tr>
     `).join("");
 
@@ -51,6 +92,21 @@
         }
       });
     });
+  }
+
+  function renderReturnHistory(loans) {
+    const container = document.getElementById("returnHistory");
+    if (!loans.length) {
+      container.innerHTML = '<div class="status-item">Nenhuma devolução registrada no momento.</div>';
+      return;
+    }
+
+    container.innerHTML = loans.map((loan) => `
+      <div class="status-item">
+        <strong>${app.escapeHtml(loan.cliente.nome)}</strong>
+        <p>${app.escapeHtml(loan.livro.titulo)} • empréstimo em ${app.formatDate(loan.dataEmprestimo)} • devolvido</p>
+      </div>
+    `).join("");
   }
 
   function renderLateList(loans) {
