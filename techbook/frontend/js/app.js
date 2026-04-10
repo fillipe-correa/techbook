@@ -57,6 +57,10 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
   }
 
+  function nextId(items) {
+    return items.length ? Math.max(...items.map((item) => Number(item.id) || 0)) + 1 : 1;
+  }
+
   function updateBookStatus(book) {
     if (book.quantidadeDisponivel <= 0) {
       book.status = "INDISPONIVEL";
@@ -116,8 +120,7 @@
     }
 
     if (method === "POST" && path === "/livros") {
-      const nextId = Math.max(...db.livros.map((item) => item.id)) + 1;
-      const livro = { id: nextId, ...body };
+      const livro = { id: nextId(db.livros), ...body };
       updateBookStatus(livro);
       db.livros.push(livro);
       saveDb(db);
@@ -145,8 +148,7 @@
     }
 
     if (method === "POST" && path === "/clientes") {
-      const nextId = Math.max(...db.clientes.map((item) => item.id)) + 1;
-      const client = { id: nextId, ...body };
+      const client = { id: nextId(db.clientes), ...body };
       db.clientes.push(client);
       saveDb(db);
       return client;
@@ -221,6 +223,10 @@
       if (!reservation || reservation.status !== "PENDENTE") {
         throw new Error("A reserva precisa estar pendente para confirmar a retirada.");
       }
+      const admin = db.administradores.find((item) => item.id === Number(body.administradorId));
+      if (!admin) {
+        throw new Error("Administrador não encontrado.");
+      }
       reservation.status = "RETIRADO";
       const nextId = (db.emprestimos.at(-1)?.id || 0) + 1;
       const loan = {
@@ -245,14 +251,26 @@
       if (!loan || loan.renovado || loan.status === "ATRASADO") {
         throw new Error("A renovação pode ser realizada apenas uma vez e não pode estar atrasada.");
       }
+      const dueDate = new Date(`${loan.dataDevolucaoPrevista}T00:00:00`);
+      dueDate.setDate(dueDate.getDate() + 7);
       loan.renovado = true;
-      loan.dataDevolucaoPrevista = plusDays(7);
+      loan.dataDevolucaoPrevista = dueDate.toISOString().slice(0, 10);
       saveDb(db);
       return enrichLoan(db, loan);
     }
 
     if (method === "POST" && path === "/emprestimos/devolucoes") {
       const loan = db.emprestimos.find((item) => item.id === body.emprestimoId);
+      const admin = db.administradores.find((item) => item.id === Number(body.administradorId));
+      if (!loan) {
+        throw new Error("Empréstimo não encontrado.");
+      }
+      if (!admin) {
+        throw new Error("Administrador não encontrado.");
+      }
+      if (loan.status === "DEVOLVIDO") {
+        throw new Error("Esse empréstimo já foi devolvido.");
+      }
       loan.status = "DEVOLVIDO";
       const book = getBook(db, loan.livroId);
       book.quantidadeDisponivel += 1;

@@ -54,6 +54,7 @@
   async function renderFeaturedBooks() {
     if (page !== "home") return;
     const grid = document.getElementById("featuredGrid");
+    if (!grid) return;
     const livros = await app.request("/livros");
     grid.innerHTML = livros.slice(0, 3).map(cardTemplate).join("");
   }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechBook | Livros e Estoque ADM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/adm.css">
+</head>
+<body data-page="admin">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" role="img"><path d="M10 14c9 0 16 3 22 10v31c-6-7-13-10-22-10V14Z" /><path d="M54 14c-9 0-16 3-22 10v31c6-7 13-10 22-10V14Z" /><path d="M32 24c-5-6-12-10-20-12" /><path d="M32 24c5-6 12-10 20-12" /><path d="M33 54c2-17 10-29 22-36" /><path d="M30 54c-2-17-10-29-22-36" /></svg></span><div><strong>TECHBOOK</strong><p>Painel Administrativo</p></div></div>
+      <nav class="admin-nav">
+        <a href="adm.html">Visão Geral</a>
+        <a href="adm-reservas.html">Registrar Empréstimo / Retirada</a>
+        <a href="adm-devolucao.html">Registrar Devolução</a>
+        <a href="adm-atrasos.html">Verificar atrasos</a>
+        <a class="active" href="adm-livros.html">Livros e Estoque</a>
+        <a href="adm-usuarios.html">Consultar Usuários</a>
+      </nav>
+      <div class="sidebar-user"><div><strong>Administrador</strong><span>Controle de Acervo</span></div></div>
+    </aside>
+    <main class="admin-main">
+      <section class="admin-screen list-screen" id="livros">
+        <div class="screen-topbar">
+          <div class="screen-heading"><h2>Livros e Estoque</h2><p>Consulte, cadastre, edite e atualize o estoque no mesmo lugar</p></div>
+          <a class="button ghost" href="adm.html">Voltar ao Menu</a>
+        </div>
+        <div class="search-bar">
+          <div class="search-input"><span class="search-icon">⌕</span><input type="text" id="bookSearchInput" placeholder="Procurar Livro"></div>
+          <button class="button primary search-button" id="bookSearchButton" type="button">Buscar</button>
+        </div>
+        <div class="table-shell data-table-shell">
+          <table>
+            <thead><tr><th>Seleção</th><th>ID. LIVRO</th><th>TÍTULO</th><th>AUTOR</th><th>CATEGORIA</th><th>QUANTIDADE</th><th>STATUS</th></tr></thead>
+            <tbody id="bookTable"></tbody>
+          </table>
+        </div>
+        <div class="bottom-actions">
+          <button class="button primary wide-action" id="editBookButton" type="button">Editar</button>
+          <button class="button danger wide-action" id="deleteBookButton" type="button">Excluir</button>
+        </div>
+        <div class="helper-text">Selecione um livro para editar título, dados e estoque. Para cadastrar um novo, preencha o formulário abaixo sem selecionar nenhum item.</div>
+        <section class="admin-screen form-screen" id="gestao">
+          <div class="screen-topbar">
+            <div class="screen-heading"><h2>Cadastro e Atualização de Estoque</h2><p>Atualize quantidade disponível e total direto nessa mesma página</p></div>
+          </div>
+          <form id="bookForm" class="admin-form-grid three-cols">
+            <input type="hidden" id="bookId">
+            <label class="field-block"><span>ID. do Livro</span><input type="text" id="bookDisplayId" placeholder="Gerado automaticamente" disabled></label>
+            <label class="field-block"><span>Título</span><input type="text" id="bookTitle" placeholder="Ex: Título do livro" required></label>
+            <label class="field-block"><span>Autor</span><input type="text" id="bookAuthor" placeholder="Ex: Nome do autor" required></label>
+            <label class="field-block"><span>Categoria</span><input type="text" id="bookCategory" placeholder="Ex: Literatura" required></label>
+            <label class="field-block"><span>Quantidade Disponível</span><input type="number" id="bookAvailable" placeholder="Ex: 20" required></label>
+            <label class="field-block"><span>Quantidade Total</span><input type="number" id="bookTotal" placeholder="Ex: 30" required></label>
+            <label class="field-block full"><span>Imagem da capa</span><input type="url" id="bookImage" placeholder="URL da capa"></label>
+            <label class="field-block full"><span>Descrição</span><textarea id="bookDescription" placeholder="Escreva uma breve descrição do livro" rows="6" required></textarea></label>
+            <div class="form-submit-row full left">
+              <button class="button primary wide-action" type="submit">Salvar Livro</button>
+            </div>
+          </form>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+  <script src="js/adm.js"></script>
+</body>
+</html>
