@@ -1,0 +1,477 @@
+:root {
+  --blue-700: #168eea;
+  --blue-800: #0f72da;
+  --blue-900: #0a4e9d;
+  --ink-900: #111827;
+  --ink-700: #4b5563;
+  --ink-500: #6b7280;
+  --surface: #ffffff;
+  --surface-2: #f5f8fc;
+  --line: rgba(18, 66, 125, 0.12);
+  --success: #13b63f;
+  --danger: #ef4444;
+  --shadow: 0 18px 44px rgba(13, 69, 135, 0.12);
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  color: var(--ink-900);
+  background:
+    radial-gradient(circle at top left, rgba(22, 142, 234, 0.12), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.site-header,
+.site-footer,
+.content-page,
+.catalog-page,
+.book-detail,
+.reservation-layout,
+.support-layout,
+.home-strip,
+.home-catalog,
+.hero {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 0;
+}
+
+.app-header-wrap {
+  background: #1490e8;
+}
+
+.app-header {
+  width: min(1240px, calc(100% - 48px));
+  padding: 18px 0 8px;
+}
+
+.app-header .brand,
+.app-header .site-nav,
+.app-header .site-nav a,
+.app-header .site-actions a,
+.app-header .site-actions button {
+  color: #ffffff;
+}
+
+.app-header .brand {
+  font-size: 1.05rem;
+}
+
+.app-header .brand-mark {
+  background: transparent;
+  display: inline-flex;
+  width: 54px;
+  height: 54px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-header .brand-mark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app-header .site-nav {
+  gap: 42px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.app-header .site-nav a.active,
+.app-header .site-nav a:hover {
+  color: #fef4d7;
+}
+
+.app-header .site-actions {
+  min-width: 112px;
+  justify-content: flex-end;
+}
+
+.app-header .site-actions .primary {
+  display: none;
+}
+
+.app-header .site-actions .ghost {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.app-header .site-actions .ghost::before {
+  content: "👤";
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--blue-800);
+}
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--blue-700), var(--blue-900));
+  color: white;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.site-nav a.active,
+.site-nav a:hover {
+  color: var(--blue-800);
+}
+
+.site-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.button,
+.site-actions a,
+.site-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.button:hover,
+.site-actions a:hover,
+.site-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.button.primary,
+.site-actions .primary {
+  color: white;
+  background: linear-gradient(180deg, #28a8f3 0%, #1490e8 100%);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.05), 0 10px 16px rgba(0, 0, 0, 0.14);
+}
+
+.button.secondary {
+  color: var(--blue-800);
+  background: rgba(22, 142, 234, 0.12);
+}
+
+.button.ghost,
+.site-actions .ghost {
+  color: var(--ink-900);
+  background: white;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.button.danger {
+  color: white;
+  background: var(--danger);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--blue-700);
+}
+
+.section-heading,
+.headline-panel,
+.support-panel,
+.info-card,
+.cta-banner,
+.catalog-toolbar,
+.book-panel,
+.reservation-panel,
+.profile-menu,
+.auth-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+
+.section-heading h1,
+.section-heading h2,
+.headline-panel h1,
+.auth-card h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  color: #148de7;
+  font-weight: 800;
+}
+
+.site-footer {
+  margin-top: 48px;
+  margin-bottom: 24px;
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(135deg, var(--blue-800), #0b7cd7);
+  color: white;
+  border-radius: var(--radius-xl);
+}
+
+.site-footer a,
+.site-footer p,
+.site-footer strong {
+  display: block;
+  margin: 6px 0;
+}
+
+.app-footer {
+  margin-top: 54px;
+  background: #1490e8;
+  color: #ffffff;
+}
+
+.app-footer-inner {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 44px 0 60px;
+  display: grid;
+  grid-template-columns: 1.25fr 0.8fr 0.8fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.app-footer .footer-brand-link,
+.app-footer .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff8ea;
+  font-size: clamp(2.1rem, 4vw, 3.5rem);
+  font-weight: 800;
+}
+
+.app-footer .brand-mark {
+  background: transparent;
+  display: inline-flex;
+  width: 54px;
+  height: 54px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-footer .brand-mark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app-footer .footer-column h3 {
+  margin: 0 0 16px;
+  color: #fff8ea;
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.app-footer .footer-column a {
+  display: block;
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+
+.app-footer .social-links {
+  display: flex;
+  gap: 20px;
+}
+
+.app-footer .social-links a {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+}
+
+.app-footer .social-links svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app-footer .social-links a:nth-child(1) svg path,
+.app-footer .social-links a:nth-child(2) svg path {
+  fill: currentColor;
+  stroke: none;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.book-card {
+  padding: 18px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 0.72;
+  object-fit: cover;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #d9ebfb, #edf5ff);
+}
+
+.book-card h3 {
+  margin: 18px 0 6px;
+  font-size: 1rem;
+}
+
+.book-card p {
+  margin: 0 0 6px;
+  color: var(--ink-700);
+  font-size: 0.92rem;
+}
+
+.meta-pill {
+  display: inline-flex;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(22, 142, 234, 0.12);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue-800);
+}
+
+.feedback {
+  min-height: 24px;
+  margin: 10px 0 0;
+  color: var(--blue-900);
+  font-weight: 600;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid rgba(15, 114, 218, 0.14);
+  border-radius: 18px;
+  background: #f2f7fd;
+  padding: 15px 18px;
+  color: var(--ink-900);
+  box-shadow: inset 0 -2px 0 rgba(17, 24, 39, 0.06);
+}
+
+@media (max-width: 860px) {
+  .site-header,
+  .site-footer,
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-nav {
+    gap: 14px;
+  }
+
+  .app-header {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .app-header .site-nav {
+    gap: 14px;
+    font-size: 0.8rem;
+  }
+
+  .app-footer-inner {
+    width: min(100%, calc(100% - 32px));
+    grid-template-columns: 1fr;
+  }
+
+  .app-footer .footer-brand-link,
+  .app-footer .footer-brand {
+    font-size: 2.2rem;
+  }
+
+  .app-footer .footer-column h3 {
+    font-size: 1.2rem;
+  }
+
+  .app-footer .footer-column a {
+    font-size: 1rem;
+  }
+}
