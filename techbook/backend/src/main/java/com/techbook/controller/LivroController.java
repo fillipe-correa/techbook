@@ -4,32 +4,38 @@ import com.techbook.model.Livro;
 import com.techbook.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/livros") // Rota para acessar os livros
+@RequestMapping("/api/livros")
 public class LivroController {
 
     @Autowired
-    private LivroService livroService; // O Controller agora "conversa" com o Service
+    private LivroService livroService;
 
     @GetMapping
     public List<Livro> listar() {
-        return livroService.buscarTodos();
+        return livroService.listarLivros();
     }
 
     @PostMapping
-    public Livro criar(@RequestBody Livro livro) {
-        return livroService.cadastrar(livro);
+    public Livro cadastrar(@RequestBody Livro livro) {
+        return livroService.cadastrarLivro(livro);
     }
 
     @GetMapping("/{id}")
-    public Livro buscar(@PathVariable Long id) {
-        return livroService.buscarPorId(id);
+    public Livro consultar(@PathVariable Long id) {
+        return livroService.consultarPorId(id);
     }
 
     @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
-        livroService.excluir(id);
+        livroService.removerLivro(id);
+    }
+
+    @GetMapping("/{id}/disponibilidade")
+    public boolean verificarDisponibilidade(@PathVariable Long id) {
+        return livroService.verificarDisponibilidade(id);
     }
 }

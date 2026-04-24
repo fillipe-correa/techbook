@@ -10,12 +10,21 @@ public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idLivro; // Nome exato da documentação (PK)
 
     private String titulo;
     private String autor;
     private String categoria;
-    private Integer edicao;
-    private String isbn;
-    private boolean disponivel = true; // Para o controle de empréstimos
+
+    private Integer quantidadeDisponivel;
+
+
+    // métodos
+    public boolean verificarDisponibilidade() {
+        return this.quantidadeDisponivel != null && this.quantidadeDisponivel > 0;
+    }
+
+    public void atualizarStatus(Integer novaQuantidade) {
+        this.quantidadeDisponivel = novaQuantidade;
+    }
 }

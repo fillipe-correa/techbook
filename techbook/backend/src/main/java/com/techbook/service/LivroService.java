@@ -4,6 +4,7 @@ import com.techbook.model.Livro;
 import com.techbook.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -12,23 +13,29 @@ public class LivroService {
     @Autowired
     private LivroRepository livroRepository;
 
-    // Listar todos os livros cadastrados
-    public List<Livro> buscarTodos() {
+
+    public List<Livro> listarLivros() {
         return livroRepository.findAll();
     }
 
-    // Salvar um livro
-    public Livro cadastrar(Livro livro) {
+
+    public Livro cadastrarLivro(Livro livro) {
         return livroRepository.save(livro);
     }
 
-    // Buscar um livro específico pelo ID
-    public Livro buscarPorId(Long id) {
+
+    public Livro consultarPorId(Long id) {
         return livroRepository.findById(id).orElse(null);
     }
 
-    // Deletar um livro do sistema
-    public void excluir(Long id) {
+
+    public void removerLivro(Long id) {
         livroRepository.deleteById(id);
+    }
+
+
+    public boolean verificarDisponibilidade(Long id) {
+        Livro livro = consultarPorId(id);
+        return livro != null && livro.verificarDisponibilidade();
     }
 }
