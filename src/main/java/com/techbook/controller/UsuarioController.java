@@ -1,26 +1,25 @@
 package com.techbook.controller;
 
 import com.techbook.model.Usuario;
-import com.techbook.repository.UsuarioRepository;
+import com.techbook.service.UsuarioService; // Importa o Service agora
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository repository;
+    private UsuarioService usuarioService; // Chama o Service em vez do Repository
 
     @GetMapping
-    public List<Usuario> listarTodos() {
-        return repository.findAll();
+    public List<Usuario> listar() {
+        return usuarioService.buscarTodos();
     }
 
     @PostMapping
-    public Usuario cadastrar(@RequestBody Usuario usuario) {
-        return repository.save(usuario);
+    public Usuario criar(@RequestBody Usuario usuario) {
+        return usuarioService.cadastrar(usuario);
     }
 }
