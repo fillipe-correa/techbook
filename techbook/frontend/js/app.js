@@ -31,7 +31,7 @@
       if (error instanceof Error && !/Failed to fetch|NetworkError|Load failed/i.test(error.message)) {
         throw error;
       }
-      throw new Error("Não foi possível conectar ao backend. Integração preparada para API futura em /api.");
+      throw new Error("Não foi possível conectar ao backend em http://localhost:8080/api. Inicie a API para concluir a integração.");
     }
   }
 
@@ -63,19 +63,19 @@
     const cleanPath = path.split("?")[0];
 
     if (cleanPath === "/livros") {
-      return Array.isArray(payload) ? payload.map(normalizeBook) : [];
+      return Array.isArray(payload) ? payload.map(normalizeBook) : normalizeBook(payload);
     }
     if (cleanPath.startsWith("/livros/")) {
       return normalizeBook(payload);
     }
     if (cleanPath === "/clientes") {
-      return Array.isArray(payload) ? payload.map(normalizeClient) : [];
+      return Array.isArray(payload) ? payload.map(normalizeClient) : normalizeClient(payload);
     }
     if (cleanPath.endsWith("/reservas") || cleanPath === "/reservas") {
-      return Array.isArray(payload) ? payload.map(normalizeReservation) : [];
+      return Array.isArray(payload) ? payload.map(normalizeReservation) : normalizeReservation(payload);
     }
     if (cleanPath.endsWith("/emprestimos") || cleanPath === "/emprestimos") {
-      return Array.isArray(payload) ? payload.map(normalizeLoan) : [];
+      return Array.isArray(payload) ? payload.map(normalizeLoan) : normalizeLoan(payload);
     }
     if (cleanPath === "/administracao/dashboard") {
       return normalizeDashboard(payload);
@@ -90,7 +90,7 @@
       autor: book.autor || "",
       categoria: book.categoria || "",
       descricao: book.descricao || "",
-      imagemUrl: book.imagemUrl || book.imagem_url || "",
+      imagemUrl: book.imagemUrl || book.imagem_url || "img/livros.svg",
       quantidadeTotal: Number(book.quantidadeTotal ?? book.quantidade_total) || 0,
       quantidadeDisponivel: Number(book.quantidadeDisponivel ?? book.quantidade_disponivel) || 0,
       status: book.status || "INDISPONIVEL"

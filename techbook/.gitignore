@@ -1,16 +1,17 @@
-# Configurações do IntelliJ
+# IDEs
 .idea/
+.vscode/
 *.iws
 *.iml
 *.ipr
 out/
 
-# Arquivos de compilação do Maven
+# Build
 target/
 
-# Arquivos do Sistema Operacional
+# OS
 .DS_Store
 Thumbs.db
 
-# Configurações locais (senhas, etc)
+# Config local
 application-local.properties

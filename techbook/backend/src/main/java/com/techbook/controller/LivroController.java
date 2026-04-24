@@ -1,41 +1,54 @@
 package com.techbook.controller;
 
-import com.techbook.model.Livro;
-import com.techbook.service.LivroService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import com.techbook.dto.BookRequest;
+import com.techbook.dto.LivroResponse;
+import com.techbook.service.TechbookService;
 import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/livros")
 public class LivroController {
 
-    @Autowired
-    private LivroService livroService;
+    private final TechbookService service;
 
-    @GetMapping
-    public List<Livro> listar() {
-        return livroService.listarLivros();
+    public LivroController(TechbookService service) {
+        this.service = service;
     }
 
-    @PostMapping
-    public Livro cadastrar(@RequestBody Livro livro) {
-        return livroService.cadastrarLivro(livro);
+    @GetMapping
+    public List<LivroResponse> listarTodos() {
+        return service.listarLivros();
     }
 
     @GetMapping("/{id}")
-    public Livro consultar(@PathVariable Long id) {
-        return livroService.consultarPorId(id);
+    public LivroResponse buscarPorId(@PathVariable Long id) {
+        return service.buscarLivro(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public LivroResponse cadastrar(@RequestBody BookRequest request) {
+        return service.criarLivro(request);
+    }
+
+    @PutMapping("/{id}")
+    public LivroResponse atualizar(@PathVariable Long id, @RequestBody BookRequest request) {
+        return service.atualizarLivro(id, request);
     }
 
     @DeleteMapping("/{id}")
-    public void remover(@PathVariable Long id) {
-        livroService.removerLivro(id);
-    }
-
-    @GetMapping("/{id}/disponibilidade")
-    public boolean verificarDisponibilidade(@PathVariable Long id) {
-        return livroService.verificarDisponibilidade(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluir(@PathVariable Long id) {
+        service.excluirLivro(id);
     }
 }
