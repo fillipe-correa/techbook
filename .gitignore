@@ -1,0 +1,21 @@
+# IDEs
+.idea/
+.vscode/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Build
+target/
+backend/target/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config local
+application-local.properties
+
+# Logs
+*.log

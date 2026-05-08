@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechBook | Cadastro</title>
+
+  <!-- LINKS DO SITE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body data-page="signup">
+
+  <header class="login-header">
+    <a href="index.html">
+      <img src="img/LOGO TECHBOOK.svg" alt="TechBook" class="login-logo">
+    </a>
+  </header>
+
+  <main class="auth-shell signup-shell">
+
+    <form id="signupForm" class="auth-card signup-card">
+      <h1>CRIAR MINHA CONTA</h1>
+
+      <p class="signup-required">Campos obrigatórios (*)</p>
+
+      <div class="split-fields">
+
+        <div class="input-group">
+          <input type="text" id="signupName" required>
+          <label for="signupName">* Nome completo</label>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="signupCpf" maxlength="11" inputmode="numeric" required>
+          <label for="signupCpf">* CPF</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="signupEmail" required>
+          <label for="signupEmail">* E-mail</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="signupEmailConfirm" required>
+          <label for="signupEmailConfirm">* Confirmar e-mail</label>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="signupPhone" maxlength="11" inputmode="numeric" required>
+          <label for="signupPhone">* DDD e número de celular</label>
+        </div>
+
+        <div></div>
+
+        <div class="signup-line"></div>
+
+        <div class="input-group password-group">
+          <input type="password" id="signupPassword" required>
+          <label for="signupPassword">* Senha</label>
+
+          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <img src="img/olho-fechado.svg" alt="Mostrar senha">
+          </button>
+        </div>
+
+        <div class="input-group password-group">
+          <input type="password" id="signupPasswordConfirm" required>
+          <label for="signupPasswordConfirm">* Confirmar senha</label>
+
+          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <img src="img/olho-fechado.svg" alt="Mostrar senha">
+          </button>
+        </div>
+
+      </div>
+
+      <button class="button primary" type="submit">Cadastrar</button>
+
+      <p class="feedback" id="signupFeedback"></p>
+
+      <a href="login.html" class="back-login-link">Já tenho conta</a>
+    </form>
+
+    <div class="help-link-wrap">
+      <a href="suporte.html" class="help-link">Preciso de ajuda</a>
+    </div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

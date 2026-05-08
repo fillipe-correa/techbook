@@ -1,0 +1,683 @@
+/* Fundo geral da página */
+
+.home-page {
+  background: #ffffff;
+}
+
+.hero-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #1692e7;
+}
+
+/* =========================
+   CABEÇALHO (HEADER)
+========================= */
+
+/* Estrutura do cabeçalho */
+.hero-header {
+  position: relative;
+  z-index: 3;
+  width: calc(100% - 112px);
+  margin: 0 auto;
+
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Menu de navegação */
+.hero-nav {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  text-transform: uppercase;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.hero-nav a {
+  font-size: 1.1rem;
+}
+
+/* Define cor branca para todos os itens do header */
+.hero-brand,
+.hero-nav,
+.hero-nav a,
+.hero-actions a,
+.hero-actions button {
+  color: #ffffff;
+}
+
+/* ==== LOGOS ======= */
+
+/* LOGO DA TECHBOOK */
+.hero-brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo-icon {
+  height: 50px;
+  display: block;
+}
+
+/* =========================
+   HERO (CONTEÚDO PRINCIPAL)
+========================= */
+
+.hero {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: calc(100vh - 76px);
+  margin: 0;
+  display: block;
+}
+
+/* =========================
+   IMAGEM DE FUNDO
+========================= */
+
+/* IMAGEM COMO FUNDO */
+.hero-visual {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+}
+
+/* IMAGEM CENTRALIZADA */
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  filter: saturate(1.03) brightness(1.01);
+}
+
+.hero-nav a.active,
+.hero-nav a:hover {
+  color: #fef6da;
+}
+
+.hero-actions {
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* BOTÃO ENTRAR */
+.hero-actions .perfil {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  line-height: 1;
+
+  transform: translateY(-3px);
+}
+
+.hero-actions .primary {
+  display: none;
+}
+
+.login-icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+
+/* =========================
+   TEXTO PRINCIPAL
+========================= */
+
+.hero-copy {
+  position: relative;
+  z-index: 3;
+  padding: 90px 0 160px 150px;
+  color: #ffffff;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  max-width: 840px;
+  font-size: clamp(3rem, 5.25vw, 7.1rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  font-weight: 800;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+}
+
+/* Linha do título */
+.hero-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+/* Cor clara */
+.hero-copy .line-light {
+  color: #fff8ea;
+}
+
+/* Cor escura */
+.hero-copy .line-dark {
+  color: #002962;
+}
+
+/* Espaço entre linhas */
+.hero-title-row + .hero-title-row {
+  margin-top: 12px;
+}
+
+/* Texto descritivo */
+.hero-text {
+  max-width: 690px;
+  margin: 34px 0 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(1.2rem, 2vw, 1.92rem);
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+}
+
+/* Botões */
+.hero-buttons {
+  margin-top: 52px;
+}
+
+/* Botão principal */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 78px;
+  padding: 0 38px;
+  border: 2px solid rgba(255, 250, 230, 0.82);
+  border-radius: 999px;
+  color: #fff8ea;
+  background: transparent;
+  font-size: clamp(1.3rem, 1.55vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+/* =========================
+   REDES SOCIAIS
+========================= */
+
+.hero-socials {
+  position: absolute;
+  left: 54px;
+  bottom: 30px;
+  display: flex;
+  gap: 28px;
+}
+
+.hero-socials a {
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  color: rgba(255, 248, 234, 0.92);
+}
+
+.social-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-lines {
+  left: -170px;
+  bottom: 14px;
+  width: 760px;
+  height: 186px;
+  opacity: 0.75;
+  background: repeating-linear-gradient(111deg, transparent 0 24px, rgba(92, 255, 233, 0.72) 24px 28px);
+  transform: skewX(-14deg);
+
+}
+
+.auth-shell {
+  width: min(1100px, calc(100% - 32px));
+  margin: 28px auto;
+}
+
+.auth-brand {
+  margin-bottom: 22px;
+}
+
+.auth-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.auth-card {
+  padding: 30px;
+}
+
+.auth-card h1 {
+  margin-bottom: 20px;
+}
+
+.auth-card input {
+  width: 100%;
+  height: 48px; /* 🔥 aumenta altura */
+  padding: 0 16px;
+
+  margin-bottom: 16px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+
+  font-size: 0.95rem;
+}
+
+.signup-card {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.split-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 1200px) {
+  .hero-header {
+    width: min(100%, calc(100% - 48px));
+  }
+
+  .hero-nav {
+    gap: 34px;
+  }
+
+  .hero-copy {
+    padding: 120px 0 120px 60px;
+  }
+}
+
+/* =========================
+   RESPONSIVO (TELAS MENORES)
+   Ajustes para tablets e celulares
+   Adaptando layout, textos e espaçamentos
+========================= */
+
+@media (max-width: 900px) {
+  .auth-grid,
+  .home-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-shell {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #1692e7 0%, #1692e7 58%, #0f7fd1 100%);
+  }
+
+  .hero-header {
+    width: min(100%, calc(100% - 28px));
+    padding-top: 16px;
+  }
+
+  .hero {
+    min-height: calc(100vh - 76px);
+  }
+
+  .hero-copy {
+    padding: 56px 18px 24px;
+  }
+
+  .hero-copy h1 {
+    max-width: none;
+    font-size: clamp(2.7rem, 10vw, 5rem);
+  }
+
+  .hero-title-row {
+    gap: 12px;
+  }
+
+  .hero-title-row + .hero-title-row {
+    margin-top: 6px;
+  }
+
+  .hero-text {
+    max-width: none;
+    font-size: 1.1rem;
+  }
+
+  .hero-buttons {
+    margin-top: 28px;
+  }
+
+  .hero-cta {
+    min-height: 66px;
+    width: 100%;
+    padding: 0 22px;
+    font-size: 1.2rem;
+  }
+
+  .hero-socials {
+    position: static;
+    margin-top: 28px;
+  }
+
+  .hero-socials a {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-visual {
+    min-height: 38vh;
+  }
+
+  .hero-dots-top {
+    left: auto;
+    right: 16px;
+    top: 10px;
+  }
+
+  .hero-dots-bottom {
+    left: 16px;
+    bottom: 28px;
+    width: 220px;
+    height: 140px;
+  }
+
+  .hero-lines {
+    left: -80px;
+    width: 320px;
+    height: 100px;
+    bottom: 14px;
+  }
+
+  .hero-circle-left {
+    left: -80px;
+    top: 54px;
+    width: 160px;
+    height: 160px;
+  }
+
+  .hero-circle-right {
+    right: -10px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .split-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-header {
+  height: 90px;
+  background: #1490e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-logo {
+  height: 54px;
+}
+
+.login-area {
+  width: min(900px, calc(100% - 48px));
+  margin: 70px auto 0;
+  display: grid;
+  grid-template-columns: 480px 2px 480px;
+  justify-content: center;
+  gap: 70px;
+  align-items: start;
+}
+
+.login-divider {
+  width: 2px;
+  height: 450px;
+  background: #d9d9d9;
+}
+
+.forgot-link {
+  display: block;
+  margin: 4px 0 18px;
+  color: #6b6b6b;
+  font-size: 0.9rem;
+}
+
+.help-link {
+  display: inline-block;
+  margin-top: 50px;
+  text-align: center;
+  color: #148de7;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+/* 🔥 BOTÕES DO LOGIN */
+.login-area .button.primary,
+.login-area .button.secondary {
+  min-width: 220px;
+  height: 46px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* ANIMAÇÃO DOS CAMPOS DO LOGIN */
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-group input {
+  width: 100%;
+  height: 56px;
+  padding: 14px 14px 6px;
+  border: 0;
+  outline: none;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  font-size: 0.95rem;
+}
+
+.input-group label {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  color: #6b6b6b;
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: 0.2s ease;
+  background: #ffffff;
+  padding: 0 4px;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+  top: -8px;
+  font-size: 0.75rem;
+  color: #148de7;
+  font-weight: 700;
+}
+
+.input-group input:focus {
+  box-shadow: 0 0 0 2px rgba(20, 144, 232, 0.25),
+              0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* ANIMAÇÃO OLHO */
+/* BOTÃO DE MOSTRAR/OCULTAR SENHA */
+.password-group {
+  position: relative;
+}
+
+.password-group input {
+  padding-right: 50px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.toggle-password img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.help-link-wrap {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.help-link {
+  display: inline-block;
+  color: #148de7;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+/* =========================
+   RECUPERAR SENHA
+========================= */
+
+.recover-shell {
+  display: flex;
+  justify-content: center;
+}
+
+.recover-card {
+  width: min(520px, 100%);
+  margin-top: 60px;
+  padding: 42px;
+}
+
+.recover-card h1 {
+  margin-bottom: 18px;
+  color: #148de7;
+  font-size: 2.6rem;
+  font-weight: 800;
+}
+
+.recover-text {
+  margin-bottom: 28px;
+  color: #6b6b6b;
+  line-height: 1.5;
+}
+
+.back-login-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: #148de7;
+  font-weight: 700;
+}
+
+/* =========================
+   CADASTRO
+========================= */
+
+.signup-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-card {
+  width: min(760px, 100%);
+  margin-top: 60px;
+  padding: 42px;
+}
+
+.signup-card h1 {
+  margin-bottom: 18px;
+  color: #148de7;
+  font-size: 2.6rem;
+  font-weight: 800;
+}
+
+.signup-text {
+  margin-bottom: 28px;
+  color: #6b6b6b;
+  line-height: 1.5;
+}
+
+.signup-card .button.primary {
+  min-width: 220px;
+  height: 46px;
+  border-radius: 999px;
+}
+
+.back-login-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: #148de7;
+  font-weight: 700;
+}
+
+/* =========================
+   CRIAR CONTA
+========================= */
+
+.signup-required {
+  margin: -10px 0 24px;
+  color: #6b6b6b;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.signup-line {
+  grid-column: 1 / -1;
+  width: 88%;
+  height: 2px;
+  margin: 8px auto 16px;
+  background: #148de7;
+  border-radius: 999px;
+}
+
+.signup-card .button.primary {
+  display: flex;
+  margin: 8px auto 0;
+  width: 260px;
+}
+
+.back-login-link {
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+}

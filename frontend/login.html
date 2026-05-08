@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechBook | Entrar</title>
+
+  <!-- LINKS DO SITE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body data-page="login">
+
+  <header class="login-header">
+    <a href="index.html">
+      <img src="img/LOGO TECHBOOK.svg" alt="TechBook" class="login-logo">
+    </a>
+  </header>
+
+  <main class="auth-shell">
+
+    <section class="login-area">
+
+      <form id="loginForm" class="auth-card">
+        <h1>Já sou cliente</h1>
+
+        <div class="input-group">
+          <input type="email" id="loginEmail" required>
+          <label for="loginEmail">E-mail</label>
+        </div>
+
+        <!-- CAMPO DE SENHA COM BOTÃO PARA MOSTRAR/OCULTAR -->
+        <div class="input-group password-group">
+          <input type="password" id="loginPassword" required>
+          <label for="loginPassword">Senha</label>
+
+          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <img src="img/olho-fechado.svg" alt="Mostrar senha" id="eyeIcon">
+          </button>
+        </div>
+
+        <a href="recuperar-senha.html" class="forgot-link">Esqueci minha senha</a>
+
+        <button class="button primary" type="submit">Acessar conta</button>
+        <p class="feedback" id="loginFeedback"></p>
+      </form>
+
+      <div class="login-divider"></div>
+
+      <div class="auth-card">
+        <h1>Criar conta</h1>
+          <div class="input-group">
+            <input type="email" id="signupEmailLogin" required>
+            <label for="signupEmailLogin">Informe seu e-mail</label>
+          </div>
+        <a class="button secondary" href="cadastro.html">Prosseguir</a>
+      </div>
+
+    </section>
+
+    <div class="help-link-wrap">
+      <a href="suporte.html" class="help-link">Preciso de ajuda</a>
+    </div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

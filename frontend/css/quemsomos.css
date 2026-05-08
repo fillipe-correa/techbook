@@ -1,0 +1,556 @@
+.about-page {
+  background: #ffffff;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.about-hero-wrap {
+  background: #1490e8;
+}
+
+.about-header {
+  position: relative;
+  z-index: 3;
+  width: calc(100% - 112px);
+  height: 90px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-brand,
+.about-nav,
+.about-nav a,
+.about-actions a,
+.about-actions button {
+  color: #ffffff;
+}
+
+.about-brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo-icon,
+.about-logo {
+  height: 50px;
+  display: block;
+}
+
+/* MENU */
+.about-nav {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  text-transform: uppercase;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.about-nav a {
+  font-size: 1.1rem;
+}
+
+.about-nav a.active,
+.about-nav a:hover {
+  color: #fef4d7;
+}
+
+/* BOTÃO ENTRAR */
+.about-actions {
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.about-actions .primary {
+  display: none;
+}
+
+.about-actions .perfil {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.login-icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+/* =========================
+   BANNER TECHBOOK
+========================= */
+
+.banner {
+  width: 100%;
+  background: #1490e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.banner-img {
+  width: 900px;
+  max-width: 90%;
+  height: auto;
+  display: block;
+}
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+.about-content {
+  width: min(1320px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 70px 0 70px;
+}
+
+.about-intro {
+  display: grid;
+  grid-template-columns: 1.35fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-copy h2,
+.build-heading h2 {
+  margin: 0 0 36px;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+
+  background: linear-gradient(90deg, #016DB3, #028AE3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-copy p {
+  margin: 0 0 24px;
+  color: #4d4d4d;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* IMAGEM QUEM SOMOS */
+.about-photo-card {
+  width: 100%;
+  max-width: 800px;
+  overflow: hidden;
+  border-radius: 36px;
+  background: transparent;
+  box-shadow: none;
+  margin-top: 10px;
+}
+
+.about-photo-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 36px;
+}
+
+/* =========================
+   MISSÃO E PROPOSTA
+========================= */
+
+.mission-grid {
+  width: min(1100px, 100%); /* limita largura */
+  margin: 70px auto 70px;   /* centraliza */
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+}
+
+.mission-card {
+  padding: 42px 50px; /* mais largura interna */
+  min-height: 240px; /* aumenta altura */
+
+  background: linear-gradient(180deg, #FFFFFF 0%, #F4F4F4 55%, #D9D9D9 100%);
+
+  border-radius: 24px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mission-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.mission-card h3 {
+  margin: 0 0 18px;
+  color: #148de7;
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.mission-card p {
+  margin: 0;
+  color: #4d4d4d;
+  font-size: 1.2rem;
+  line-height: 1.55;
+}
+
+/* =========================
+   O QUE QUEREMOS CONSTRUIR
+========================= */
+
+.build-section {
+  text-align: center;
+}
+
+.build-heading h2 {
+  margin-bottom: 14px;
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+}
+
+.build-heading p {
+  margin: 8px 0 0;
+  color: #757575;
+  font-size: 1.5rem;
+}
+
+.build-grid {
+  margin-top: 60px; /* afasta do título */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px; /* antes 34px */
+}
+
+/* =========================
+   CARDS AZUIS (BUILD)
+========================= */
+
+.build-card {
+  padding: 24px 26px;
+
+  background: #1490e8; /* COR SÓLIDA */
+
+  border-radius: 24px;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.06),
+              0 12px 20px rgba(0, 0, 0, 0.12);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.build-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+/* Título do card */
+.build-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+/* Texto do card */
+.build-card p {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+
+/* =========================
+   CHAMADA FINAL
+========================= */
+
+.about-cta {
+  margin: 80px auto 0; /* afasta dos cards azuis */
+  padding: 40px 60px; /* antes 26px */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  background: #1490e8;
+  border-radius: 22px;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+.about-cta-chip,
+.about-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 56px;
+  padding: 0 32px;
+
+  border-radius: 999px; /* deixa arredondado tipo pílula */
+
+  background-image: url("../img/botao-vidro.svg");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 8px 18px rgba(0, 0, 0, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-cta-chip:hover,
+.about-cta-button:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.about-cta-copy h2 {
+  margin: 40px 0 6px;
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  line-height: 1.05;
+  
+}
+
+.about-cta-copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 1.2rem;
+}
+
+.about-cta-button {
+  min-width: 146px;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.about-footer {
+  background: #1490e8;
+  color: #ffffff;
+}
+
+.about-footer-inner {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 44px 0 46px;
+
+  display: grid;
+  grid-template-columns: 1.4fr 0.7fr 0.8fr 0.8fr;
+  align-items: flex-start;
+}
+
+.footer-brand-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.footer-logo {
+  width: 340px;
+  height: auto;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.footer-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 26px;
+  color: #ffffff;
+}
+
+.footer-location-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-address h3 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.footer-address p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+.footer-column h3 {
+  margin: 0 0 16px;
+  color: #fff8ea;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.footer-column ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.footer-column li {
+  margin: 7px 0;
+}
+
+.footer-column a {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.footer-socials a {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+}
+
+.footer-social-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 980px) {
+  .about-header,
+  .about-footer-inner {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .about-intro,
+  .mission-grid,
+  .build-grid,
+  .about-footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .about-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-nav {
+    gap: 28px;
+  }
+
+  .mission-grid,
+  .build-grid {
+    width: 100%;
+  }
+
+  .about-photo-card {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 760px) {
+  .about-header {
+    width: min(100%, calc(100% - 24px));
+    height: auto;
+    padding: 18px 0;
+
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .about-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 14px;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .about-nav a {
+    font-size: 0.85rem;
+  }
+
+  .about-content {
+    width: min(1320px, calc(100% - 48px)); /* antes 32px */
+    padding: 50px 0 50px;
+  }
+
+  .about-intro {
+    gap: 26px;
+  }
+
+  .about-copy h2,
+  .build-heading h2 {
+    font-size: clamp(3.2rem, 6vw, 4.8rem);
+  }
+
+  .about-copy p {
+    font-size: 1.21rem;
+    line-height: 1.6;
+  }
+
+  .mission-grid,
+  .build-grid {
+    gap: 18px;
+  }
+
+  .about-cta {
+    padding: 20px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-cta-button {
+    width: 100%;
+  }
+
+  .footer-brand-link {
+    font-size: 2.2rem;
+  }
+
+  .footer-column h3 {
+    font-size: 1.2rem;
+  }
+
+  .footer-column a {
+    font-size: 1rem;
+  }
+}

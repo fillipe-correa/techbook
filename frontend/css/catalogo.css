@@ -1,0 +1,593 @@
+body {
+  margin: 0;
+}
+
+.catalog-view-page {
+  background: #ffffff;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.catalog-top-wrap {
+  background: #0293F2;
+  width: 100%;
+}
+
+.catalog-header {
+  position: relative;
+  z-index: 3;
+  width: calc(100% - 112px);
+  height: 90px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.catalog-brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.catalog-brand .brand-logo-icon {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+/* Menu principal do site */
+.catalog-nav {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  text-transform: uppercase;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.catalog-nav a {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.catalog-actions a,
+.catalog-actions button {
+  color: #ffffff;
+}
+
+.catalog-nav a.active,
+.catalog-nav a:hover {
+  color: #fef4d7;
+}
+
+.catalog-actions {
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.catalog-actions .primary {
+  display: none;
+}
+
+.catalog-actions .perfil {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.login-icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+/* =========================
+   ESTRUTURA PRINCIPAL
+========================= */
+
+.catalog-page {
+  padding: 0 0 12px;
+  width: 100%;
+}
+
+.book-detail,
+.reservation-layout {
+  padding: 0 0 12px;
+}
+
+.catalog-filter-band {
+  margin-top: 0;
+  background: #0293F1;
+  padding: 32px 0;
+  width: 100%;
+}
+
+.catalog-toolbar {
+  width: min(880px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 34px;
+  align-items: center;
+  background: transparent;
+}
+
+/* =========================
+   BARRA DE FILTRO E BUSCA
+   Área onde o usuário filtra por título/autor e pesquisa livros
+========================= */
+.catalog-toolbar select {
+  width: 100%;
+  height: 46px;
+  border: 0;
+  outline: none;
+
+  padding: 0 50px 0 22px;
+
+  color: #666666;
+  font-size: 0.95rem;
+  cursor: pointer;
+
+  background: #ffffff;
+  border-radius: 14px;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("../img/seta.svg");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px;
+}
+
+/* Campo de busca do catálogo */
+.search-box {
+  height: 46px;
+  display: grid;
+  grid-template-columns: 1fr 70px;
+  gap: 0;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.search-box input {
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0 22px;
+  color: #666666;
+  font-size: 0.95rem;
+}
+
+/* ==== PESQUISA === */
+.search-box button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.search-box button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* =========================
+   RESULTADOS DO CATÁLOGO
+   Área onde aparecem o contador e os cards dos livros
+========================= */
+
+.catalog-results {
+  width: min(880px, calc(100% - 40px));
+  margin: 30px auto 0;
+}
+
+.catalog-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.catalog-count {
+  color: #7c7c7c;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.catalog-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 42px 30px;
+}
+
+.catalog-grid .book-card {
+  padding: 14px 14px 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #ededed;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.04), 0 8px 14px rgba(0, 0, 0, 0.1);
+}
+
+.catalog-grid .book-cover {
+  aspect-ratio: 0.72;
+  border-radius: 8px;
+}
+
+.catalog-grid .book-card h3 {
+  margin: 12px 0 4px;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.catalog-grid .book-card p {
+  margin: 0 0 3px;
+  color: #5c5c5c;
+  font-size: 0.9rem;
+}
+
+.catalog-grid .book-card p:nth-of-type(2),
+.catalog-grid .book-card p:nth-of-type(3) {
+  display: none;
+}
+
+.catalog-grid .button.primary {
+  min-height: 38px;
+  padding: 0 18px;
+  margin-top: 10px;
+  background: #0293F1;
+  box-shadow: none;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+}
+
+.catalog-grid .button.primary[href] {
+  width: fit-content;
+}
+
+.catalog-grid .button.primary.disabled {
+  display: inline-flex;
+  width: fit-content;
+  pointer-events: none;
+}
+
+/* =========================
+   DETALHE DO LIVRO
+   Layout usado quando o usuário acessa um livro específico
+========================= */
+
+.book-detail {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+  padding-top: 16px;
+}
+
+.book-panel {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 30px;
+  padding: 32px;
+}
+
+.book-panel .book-cover {
+  aspect-ratio: 0.68;
+}
+
+.book-panel h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.book-panel .book-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 26px 0;
+}
+
+.book-panel .description {
+  color: var(--ink-700);
+  line-height: 1.8;
+}
+
+/* =========================
+   ÁREA DE RESERVAS / PERFIL
+   Usada nas páginas ligadas à reserva do usuário
+========================= */
+
+.reservation-layout {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  padding-top: 16px;
+}
+
+.profile-menu {
+  padding: 24px;
+  height: fit-content;
+  display: grid;
+  gap: 12px;
+}
+
+.profile-menu a,
+.profile-menu button {
+  background: #f3f5f8;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+  color: var(--ink-700);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-menu .active {
+  background: rgba(22, 142, 234, 0.16);
+  color: var(--blue-900);
+}
+
+.reservation-panel {
+  padding: 28px;
+}
+
+.stack-list {
+  display: grid;
+  gap: 18px;
+}
+
+.reservation-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  padding: 18px;
+  border-radius: 22px;
+  background: #f9fbfe;
+  border: 1px solid var(--line);
+}
+
+.reservation-card img {
+  width: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.status-chip {
+  display: inline-flex;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.status-chip.success {
+  color: white;
+  background: var(--success);
+}
+
+.status-chip.neutral {
+  color: white;
+  background: #7b7f89;
+}
+
+.status-chip.alert {
+  color: white;
+  background: #d97706;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.about-footer {
+  background: #0099ff;
+  color: #ffffff;
+}
+
+.about-footer-inner {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 44px 0 46px;
+
+  display: grid;
+  grid-template-columns: 1.4fr 0.7fr 0.8fr 0.8fr;
+  align-items: flex-start;
+}
+
+.footer-brand-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.footer-logo {
+  width: 340px;
+  height: auto;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.footer-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 26px;
+  color: #ffffff;
+}
+
+.footer-location-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-address h3 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.footer-address p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+.footer-column h3 {
+  margin: 0 0 16px;
+  color: #fff8ea;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.footer-column ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.footer-column li {
+  margin: 7px 0;
+}
+
+.footer-column a {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.footer-socials a {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+}
+
+.footer-social-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* =========================
+   BANNER DO CATÁLOGO
+========================= */
+
+.catalog-hero {
+  width: 102%;
+  height: 690px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* IMAGEM DE FUNDO */
+.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: -30px center;
+  display: block;
+}
+
+/* TEXTO SVG */
+.hero-text {
+  position: absolute;
+
+  left: 65px;
+  top: 160px;
+
+  width: 45%;
+  height: auto;
+
+  z-index: 3;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 980px) {
+  .about-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalog-toolbar,
+  .book-panel,
+  .reservation-layout,
+  .reservation-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .about-footer-inner {
+    grid-template-columns: 1fr;
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .footer-logo {
+    width: 220px;
+  }
+
+  .catalog-nav {
+    gap: 14px;
+    font-size: 0.8rem;
+  }
+
+  .catalog-filter-band {
+    margin-top: 28px;
+    padding: 14px 0;
+  }
+
+  .catalog-toolbar {
+    width: min(100%, calc(100% - 24px));
+    gap: 12px;
+  }
+
+  .catalog-results {
+    width: min(100%, calc(100% - 24px));
+  }
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .footer-column h3 {
+    font-size: 1.2rem;
+  }
+
+  .footer-column a {
+    font-size: 1rem;
+  }
+}
