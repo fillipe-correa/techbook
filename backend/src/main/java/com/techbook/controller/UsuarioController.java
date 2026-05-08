@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -30,10 +31,20 @@ public class UsuarioController {
         return service.listarClientes();
     }
 
+    @GetMapping("/{clienteId}")
+    public UsuarioResponse buscarPorId(@PathVariable Long clienteId) {
+        return service.buscarCliente(clienteId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioResponse cadastrar(@RequestBody ClienteRequest request) {
         return service.criarCliente(request);
+    }
+
+    @PutMapping("/{clienteId}")
+    public UsuarioResponse atualizar(@PathVariable Long clienteId, @RequestBody ClienteRequest request) {
+        return service.atualizarCliente(clienteId, request);
     }
 
     @GetMapping("/{clienteId}/reservas")

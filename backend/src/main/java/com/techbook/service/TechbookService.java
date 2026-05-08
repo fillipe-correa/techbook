@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TechbookService {
 
+    // Centraliza os prazos usados no fluxo de reserva/emprestimo para manter a regra consistente.
     private static final int PRAZO_RETIRADA_DIAS = 3;
     private static final int PRAZO_EMPRESTIMO_DIAS = 14;
     private static final int PRAZO_RENOVACAO_DIAS = 7;
@@ -77,6 +78,7 @@ public class TechbookService {
 
     public void excluirLivro(Long id) {
         Livro livro = buscarLivroEntidade(id);
+        // Impede apagar livros ainda envolvidos em operacoes ativas para nao quebrar o historico.
         boolean possuiReserva = reservaRepository.findAll().stream()
             .anyMatch(reserva -> reserva.getLivro().getId().equals(id) && !"CANCELADA".equals(reserva.getStatus()));
         boolean possuiEmprestimo = emprestimoRepository.findAll().stream()
@@ -97,6 +99,11 @@ public class TechbookService {
             .toList();
     }
 
+    @Transactional(readOnly = true)
+    public UsuarioResponse buscarCliente(Long clienteId) {
+        return toUsuarioResponse(garantirCliente(clienteId));
+    }
+
     public UsuarioResponse criarCliente(ClienteRequest request) {
         validarCliente(request, null);
         Usuario usuario = new Usuario();
@@ -104,6 +111,16 @@ public class TechbookService {
         usuario.setEmail(request.email().trim().toLowerCase());
         usuario.setTelefone(request.telefone().trim());
         usuario.setCpf(request.cpf().trim());
+        return toUsuarioResponse(usuarioRepository.save(usuario));
+    }
+
+    public UsuarioResponse atualizarCliente(Long clienteId, ClienteRequest request) {
+        validarCliente(request, clienteId);
+        Usuario usuario = garantirCliente(clienteId);
+        usuario.setNome(textoObrigatorio(request.nome(), "nome"));
+        usuario.setEmail(textoObrigatorio(request.email(), "email").toLowerCase());
+        usuario.setTelefone(textoObrigatorio(request.telefone(), "telefone"));
+        usuario.setCpf(textoObrigatorio(request.cpf(), "cpf"));
         return toUsuarioResponse(usuarioRepository.save(usuario));
     }
 
@@ -193,6 +210,7 @@ public class TechbookService {
             throw new IllegalStateException("Nao ha estoque disponivel para concluir o emprestimo.");
         }
 
+        // O estoque so e baixado quando a retirada acontece de fato, nao no momento da reserva.
         livro.setQuantidadeDisponivel(livro.getQuantidadeDisponivel() - 1);
         livroRepository.save(livro);
 
@@ -240,6 +258,7 @@ public class TechbookService {
         }
 
         Livro livro = emprestimo.getLivro();
+        // A devolucao nunca pode ultrapassar o estoque fisico cadastrado do livro.
         livro.setQuantidadeDisponivel(Math.min(livro.getQuantidadeTotal(), livro.getQuantidadeDisponivel() + 1));
         livroRepository.save(livro);
 
@@ -288,6 +307,7 @@ public class TechbookService {
             throw new IllegalArgumentException("A quantidade disponivel nao pode ser maior que a quantidade total.");
         }
 
+        // Mantem defaults uteis para cadastro rapido sem depender de todos os campos opcionais.
         livro.setTitulo(titulo);
         livro.setAutor(autor);
         livro.setCategoria(categoria);
@@ -358,6 +378,7 @@ public class TechbookService {
     }
 
     private Emprestimo sincronizarStatusEmMemoria(Emprestimo emprestimo) {
+        // O status e recalculado em leitura para refletir atraso automaticamente pelo calendario.
         String novoStatus = calcularStatusEmprestimo(emprestimo);
         emprestimo.setStatus(novoStatus);
         return emprestimo;

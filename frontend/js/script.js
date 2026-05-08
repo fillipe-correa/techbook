@@ -220,33 +220,32 @@ async function renderAccountPage() {
           </div>
         </div>
 
-        <form id="profileForm" class="auth-card signup-card profile-card">
-          <p>Atualize seus dados cadastrais usados para reservas e empréstimos.</p>
-
-          <div class="split-fields">
-            <input type="text" id="profileName" placeholder="Nome completo" required>
-            <input type="text" id="profileCpf" placeholder="CPF" required>
-            <input type="email" id="profileEmail" placeholder="E-mail" required>
-            <input type="email" id="profileEmailConfirm" placeholder="Confirmar e-mail" required>
-            <input type="text" id="profilePhone" placeholder="DDD e número de telefone" required>
+        <form id="profileForm" class="account-data-form">
+          <div class="account-fields">
+            <label>
+              <span>Nome completo</span>
+              <input type="text" id="profileName" placeholder="Nome completo" required>
+            </label>
+            <label>
+              <span>CPF</span>
+              <input type="text" id="profileCpf" placeholder="CPF" required>
+            </label>
+            <label>
+              <span>E-mail</span>
+              <input type="email" id="profileEmail" placeholder="E-mail" required>
+            </label>
+            <label>
+              <span>Confirmar e-mail</span>
+              <input type="email" id="profileEmailConfirm" placeholder="Confirmar e-mail" required>
+            </label>
+            <label>
+              <span>Telefone</span>
+              <input type="text" id="profilePhone" placeholder="DDD e número de telefone" required>
+            </label>
           </div>
 
           <button class="button primary" type="submit">Salvar dados</button>
           <p class="feedback" id="profileFeedback"></p>
-        </form>
-
-        <form id="passwordForm" class="auth-card signup-card profile-card">
-          <h2>Alterar senha</h2>
-          <p>Atualize a senha usada no acesso à sua conta.</p>
-
-          <div class="split-fields">
-            <input type="password" id="currentPassword" placeholder="Senha atual" required>
-            <input type="password" id="newPassword" placeholder="Nova senha" required>
-            <input type="password" id="confirmNewPassword" placeholder="Confirmar nova senha" required>
-          </div>
-
-          <button class="button primary" type="submit">Alterar senha</button>
-          <p class="feedback" id="passwordFeedback"></p>
         </form>
       </section>
     </section>
@@ -267,7 +266,6 @@ async function renderAccountPage() {
     document.getElementById("profilePhone").value = client.telefone || "";
 
     bindProfileForm(session.id);
-    bindPasswordForm(session.id);
   } catch (error) {
     document.getElementById("profileFeedback").textContent = error.message;
   }
@@ -348,44 +346,6 @@ async function renderAccountPage() {
       }
     });
   }
-
-function bindPasswordForm(clientId) {
-  const form = document.getElementById("passwordForm");
-  if (!form) return;
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const currentPassword = document.getElementById("currentPassword").value.trim();
-    const newPassword = document.getElementById("newPassword").value.trim();
-    const confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
-    const feedback = document.getElementById("passwordFeedback");
-
-    if (newPassword !== confirmNewPassword) {
-      feedback.textContent = "A confirmação da nova senha precisa ser igual.";
-      feedback.style.color = "red";
-      return;
-    }
-
-    try {
-      await app.request(`/clientes/${clientId}/senha`, {
-        method: "PATCH",
-        body: {
-          senhaAtual: currentPassword,
-          novaSenha: newPassword
-        }
-      });
-
-      form.reset();
-      feedback.textContent = "Senha atualizada com sucesso.";
-      feedback.style.color = "green";
-    } catch (error) {
-      feedback.textContent = error.message;
-      feedback.style.color = "red";
-    }
-  });
-}
-
 
 })();
 

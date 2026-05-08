@@ -370,6 +370,53 @@ body {
   object-fit: cover;
 }
 
+.account-data-form {
+  display: grid;
+  gap: 22px;
+  padding: 18px;
+  border-radius: 22px;
+  background: #f9fbfe;
+  border: 1px solid var(--line);
+}
+
+.account-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.account-fields label {
+  display: grid;
+  gap: 8px;
+  color: var(--ink-700);
+  font-weight: 700;
+}
+
+.account-fields input {
+  width: 100%;
+  height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0 16px;
+  background: #ffffff;
+  color: var(--ink-900);
+}
+
+.account-fields input:focus {
+  outline: none;
+  border-color: var(--blue-700);
+  box-shadow: 0 0 0 4px rgba(22, 142, 234, 0.12);
+}
+
+.account-data-form .button {
+  justify-self: start;
+}
+
+.feedback {
+  margin: 0;
+  font-weight: 700;
+}
+
 .status-chip {
   display: inline-flex;
   padding: 10px 16px;
@@ -544,7 +591,8 @@ body {
   .catalog-toolbar,
   .book-panel,
   .reservation-layout,
-  .reservation-card {
+  .reservation-card,
+  .account-fields {
     grid-template-columns: 1fr;
   }
 }
