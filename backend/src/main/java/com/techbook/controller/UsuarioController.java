@@ -2,6 +2,7 @@ package com.techbook.controller;
 
 import com.techbook.dto.ClienteRequest;
 import com.techbook.dto.EmprestimoResponse;
+import com.techbook.dto.LoginRequest;
 import com.techbook.dto.ReservaResponse;
 import com.techbook.dto.UsuarioResponse;
 import com.techbook.service.TechbookService;
@@ -40,6 +41,11 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioResponse cadastrar(@RequestBody ClienteRequest request) {
         return service.criarCliente(request);
+    }
+
+    @PostMapping("/login")
+    public UsuarioResponse login(@RequestBody LoginRequest request) {
+        return service.loginCliente(request);
     }
 
     @PutMapping("/{clienteId}")

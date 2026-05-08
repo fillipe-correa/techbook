@@ -7,6 +7,7 @@ import com.techbook.dto.DashboardResponse;
 import com.techbook.dto.DevolucaoRequest;
 import com.techbook.dto.EmprestimoResponse;
 import com.techbook.dto.LivroResponse;
+import com.techbook.dto.LoginRequest;
 import com.techbook.dto.ReservaRequest;
 import com.techbook.dto.ReservaResponse;
 import com.techbook.dto.UsuarioResponse;
@@ -111,6 +112,7 @@ public class TechbookService {
         usuario.setEmail(request.email().trim().toLowerCase());
         usuario.setTelefone(request.telefone().trim());
         usuario.setCpf(request.cpf().trim());
+        usuario.setSenha(textoObrigatorio(request.senha(), "senha"));
         return toUsuarioResponse(usuarioRepository.save(usuario));
     }
 
@@ -121,7 +123,33 @@ public class TechbookService {
         usuario.setEmail(textoObrigatorio(request.email(), "email").toLowerCase());
         usuario.setTelefone(textoObrigatorio(request.telefone(), "telefone"));
         usuario.setCpf(textoObrigatorio(request.cpf(), "cpf"));
+        if (request.senha() != null && !request.senha().trim().isBlank()) {
+            usuario.setSenha(request.senha().trim());
+        }
         return toUsuarioResponse(usuarioRepository.save(usuario));
+    }
+
+    @Transactional(readOnly = true)
+    public UsuarioResponse loginCliente(LoginRequest request) {
+        if (request == null) {
+            throw new IllegalArgumentException("Dados de login nao informados.");
+        }
+
+        String email = textoObrigatorio(request.email(), "email").toLowerCase();
+        String senha = textoObrigatorio(request.senha(), "senha");
+
+        Usuario usuario = usuarioRepository.findByEmailIgnoreCase(email)
+            .orElseThrow(() -> new IllegalArgumentException("Cliente nao encontrado."));
+
+        if (usuario.getSenha() == null || usuario.getSenha().isBlank()) {
+            throw new IllegalStateException("Esta conta foi criada sem senha. Crie uma nova conta ou atualize a senha no banco.");
+        }
+
+        if (!senha.equals(usuario.getSenha())) {
+            throw new IllegalArgumentException("Senha incorreta.");
+        }
+
+        return toUsuarioResponse(usuario);
     }
 
     @Transactional(readOnly = true)
