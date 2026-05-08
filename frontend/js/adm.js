@@ -51,6 +51,7 @@
       pendingReservations = reservations;
       cachedUsers = users;
       cachedBooks = books;
+      // A lista de atrasados fica em cache para permitir busca local sem novas requisicoes.
       cachedLateLoans = loans.filter((loan) => loan.status === "ATRASADO");
 
       maybeApplyLoanReservationPrefill();
@@ -145,6 +146,7 @@
       return;
     }
 
+    // Quando a tela de retirada nao esta aberta, guardamos o contexto para continuar o fluxo na pagina certa.
     if (!document.getElementById("loanReservationId")) {
       sessionStorage.setItem(PREFILL_RESERVATION_KEY, String(reservationId));
       window.location.href = "adm-reservas.html";
@@ -329,6 +331,7 @@
     }
 
     const payload = {
+      // O endpoint de livro faz update completo, entao reenviamos os campos ja existentes junto do estoque.
       titulo: book.titulo,
       autor: book.autor,
       categoria: book.categoria,
@@ -428,6 +431,7 @@
     bookPrefillApplied = true;
     selectedBookId = storedBookId;
     sessionStorage.removeItem(EDIT_BOOK_KEY);
+    // Reaproveita a selecao feita na tabela quando o usuario e redirecionado para a pagina de edicao.
     fillBookForm(book);
   }
 

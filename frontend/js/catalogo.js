@@ -56,6 +56,7 @@
     function render() {
       const term = searchInput.value.trim().toLowerCase();
       const author = categoryFilter.value;
+      // A filtragem acontece 100% no cliente para manter a experiencia imediata no catalogo.
       const filtered = books.filter((book) => {
         const matchesTerm = !term || [book.titulo, book.autor, book.categoria].some((item) => item.toLowerCase().includes(term));
         const matchesAuthor = !author || book.autor === author;
@@ -177,6 +178,7 @@
   }
 
   function renderReservationButtons(book, reservation) {
+    // O CTA muda conforme sessao, estoque e existencia de reserva pendente para o mesmo livro.
     if (reservation) {
       return `
         <span class="status-chip success">Reservado</span>

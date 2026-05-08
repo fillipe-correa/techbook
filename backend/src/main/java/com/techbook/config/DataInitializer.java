@@ -24,6 +24,7 @@ public class DataInitializer {
         EmprestimoRepository emprestimoRepository
     ) {
         return args -> {
+            // Evita recriar dados de exemplo quando o banco ja foi populado manualmente.
             if (livroRepository.count() > 0 || usuarioRepository.count() > 0) {
                 return;
             }
@@ -67,6 +68,7 @@ public class DataInitializer {
             usuario.setEmail("edino@techbook.local");
             usuario.setTelefone("(11) 99999-6969");
             usuario.setCpf("11122233344");
+            usuario.setSenha("123456");
             usuario = usuarioRepository.save(usuario);
 
             Reserva reserva = new Reserva();
@@ -78,6 +80,7 @@ public class DataInitializer {
             reserva = reservaRepository.save(reserva);
 
             Emprestimo emprestimo = new Emprestimo();
+            // O emprestimo inicial nasce atrasado para alimentar o dashboard logo no primeiro acesso.
             emprestimo.setCliente(usuario);
             emprestimo.setLivro(ux);
             emprestimo.setReserva(null);

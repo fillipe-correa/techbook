@@ -36,6 +36,7 @@
         return null;
       }
       const payload = await response.json();
+      // A camada de normalizacao protege o frontend de pequenas variacoes de nome vindas da API.
       return normalizeResponse(path, payload);
     } catch (error) {
       if (error instanceof Error && !/Failed to fetch|NetworkError|Load failed/i.test(error.message)) {
@@ -113,6 +114,7 @@
   function normalizeResponse(path, payload) {
     const cleanPath = path.split("?")[0];
 
+    // Cada rota e convertida para um formato unico consumido pelas telas.
     if (cleanPath === "/livros") {
       return Array.isArray(payload) ? payload.map(normalizeBook) : normalizeBook(payload);
     }
@@ -179,6 +181,7 @@
       dataReserva: reservation.dataReserva || reservation.data_reserva || "",
       prazoRetirada: reservation.prazoRetirada || reservation.prazo_retirada || "",
       status: reservation.status || "",
+      // Alguns endpoints podem devolver objetos aninhados; aqui tudo vira uma estrutura previsivel.
       cliente: normalizeClient(reservation.cliente || {}),
       livro: normalizeBook(reservation.livro || {})
     };
