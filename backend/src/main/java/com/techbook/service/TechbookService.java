@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TechbookService {
 
     // Centraliza os prazos usados no fluxo de reserva/emprestimo para manter a regra consistente.
-    private static final int PRAZO_RETIRADA_DIAS = 3;
+    private static final int PRAZO_RETIRADA_DIAS = 1;
     private static final int PRAZO_EMPRESTIMO_DIAS = 14;
     private static final int PRAZO_RENOVACAO_DIAS = 7;
     private static final String IMAGEM_PADRAO = "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80";
@@ -177,7 +177,7 @@ public class TechbookService {
         Livro livro = buscarLivroEntidade(request.livroId());
 
         if (livro.getQuantidadeDisponivel() <= 0) {
-            throw new IllegalStateException("Nao ha exemplares disponiveis para reserva.");
+            throw new IllegalStateException("Livro indisponível no momento.");
         }
 
         boolean jaPossuiReservaPendente = reservaRepository.findByClienteIdOrderByIdDesc(cliente.getId()).stream()
