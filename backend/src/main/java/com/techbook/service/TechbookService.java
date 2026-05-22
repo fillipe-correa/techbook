@@ -176,6 +176,8 @@ public class TechbookService {
         Usuario cliente = garantirCliente(request.clienteId());
         Livro livro = buscarLivroEntidade(request.livroId());
 
+        validarLimiteEmprestimos(cliente.getId());
+
         if (livro.getQuantidadeDisponivel() <= 0) {
             throw new IllegalStateException("Livro indisponível no momento.");
         }
@@ -232,6 +234,8 @@ public class TechbookService {
         if (!"PENDENTE".equals(reserva.getStatus())) {
             throw new IllegalStateException("A retirada so pode ser confirmada para reservas pendentes.");
         }
+
+        validarLimiteEmprestimos(reserva.getCliente().getId());
 
         Livro livro = reserva.getLivro();
         if (livro.getQuantidadeDisponivel() <= 0) {
@@ -403,6 +407,16 @@ public class TechbookService {
     private Emprestimo buscarEmprestimo(Long id) {
         return emprestimoRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Emprestimo nao encontrado."));
+    }
+
+    private void validarLimiteEmprestimos(Long clienteId) {
+        long emprestimosAtivos = emprestimoRepository.findByClienteIdOrderByIdDesc(clienteId).stream()
+            .filter(emprestimo -> !"DEVOLVIDO".equals(calcularStatusEmprestimo(emprestimo)))
+            .count();
+
+        if (emprestimosAtivos >= 3) {
+            throw new IllegalStateException("Limite de emprestimos atingido. Realize a devolucao para novos emprestimos.");
+        }
     }
 
     private Emprestimo sincronizarStatusEmMemoria(Emprestimo emprestimo) {
