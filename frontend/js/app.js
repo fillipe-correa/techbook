@@ -199,7 +199,14 @@
       status: loan.status || "",
       renovado: Boolean(loan.renovado),
       cliente: normalizeClient(loan.cliente || {}),
-      livro: normalizeBook(loan.livro || {})
+      livro: normalizeBook(loan.livro || {}),
+      devolucao: loan.devolucao ? {
+        id: Number(loan.devolucao.id) || 0,
+        emprestimoId: Number(loan.devolucao.emprestimoId ?? loan.devolucao.emprestimo_id) || 0,
+        dataDevolucao: loan.devolucao.dataDevolucao || loan.devolucao.data_devolucao || "",
+        estadoLivro: loan.devolucao.estadoLivro || loan.devolucao.estado_livro || "",
+        statusDevolucao: loan.devolucao.statusDevolucao || loan.devolucao.status_devolucao || ""
+      } : null
     };
   }
 

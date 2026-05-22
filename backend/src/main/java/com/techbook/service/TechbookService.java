@@ -5,16 +5,21 @@ import com.techbook.dto.ClienteRequest;
 import com.techbook.dto.ConfirmarRetiradaRequest;
 import com.techbook.dto.DashboardResponse;
 import com.techbook.dto.DevolucaoRequest;
+import com.techbook.dto.DevolucaoResponse;
 import com.techbook.dto.EmprestimoResponse;
 import com.techbook.dto.LivroResponse;
 import com.techbook.dto.LoginRequest;
 import com.techbook.dto.ReservaRequest;
 import com.techbook.dto.ReservaResponse;
 import com.techbook.dto.UsuarioResponse;
+import com.techbook.model.Administrador;
+import com.techbook.model.Devolucao;
 import com.techbook.model.Emprestimo;
 import com.techbook.model.Livro;
 import com.techbook.model.Reserva;
 import com.techbook.model.Usuario;
+import com.techbook.repository.AdministradorRepository;
+import com.techbook.repository.DevolucaoRepository;
 import com.techbook.repository.EmprestimoRepository;
 import com.techbook.repository.LivroRepository;
 import com.techbook.repository.ReservaRepository;
@@ -40,17 +45,23 @@ public class TechbookService {
     private final UsuarioRepository usuarioRepository;
     private final ReservaRepository reservaRepository;
     private final EmprestimoRepository emprestimoRepository;
+    private final AdministradorRepository administradorRepository;
+    private final DevolucaoRepository devolucaoRepository;
 
     public TechbookService(
         LivroRepository livroRepository,
         UsuarioRepository usuarioRepository,
         ReservaRepository reservaRepository,
-        EmprestimoRepository emprestimoRepository
+        EmprestimoRepository emprestimoRepository,
+        AdministradorRepository administradorRepository,
+        DevolucaoRepository devolucaoRepository
     ) {
         this.livroRepository = livroRepository;
         this.usuarioRepository = usuarioRepository;
         this.reservaRepository = reservaRepository;
         this.emprestimoRepository = emprestimoRepository;
+        this.administradorRepository = administradorRepository;
+        this.devolucaoRepository = devolucaoRepository;
     }
 
     @Transactional(readOnly = true)
@@ -247,6 +258,8 @@ public class TechbookService {
             throw new IllegalStateException("Nao ha estoque disponivel para concluir o emprestimo.");
         }
 
+        Administrador administrador = garantirAdministrador(request.administradorId());
+
         // O estoque so e baixado quando a retirada acontece de fato, nao no momento da reserva.
         livro.setQuantidadeDisponivel(livro.getQuantidadeDisponivel() - 1);
         livroRepository.save(livro);
@@ -258,7 +271,7 @@ public class TechbookService {
         emprestimo.setCliente(reserva.getCliente());
         emprestimo.setLivro(livro);
         emprestimo.setReserva(reserva);
-        emprestimo.setAdministradorId(request.administradorId() == null ? 1L : request.administradorId());
+        emprestimo.setAdministradorId(administrador.getId());
         emprestimo.setDataEmprestimo(LocalDate.now());
         emprestimo.setDataDevolucaoPrevista(LocalDate.now().plusDays(PRAZO_EMPRESTIMO_DIAS));
         emprestimo.setStatus("ATIVO");
@@ -294,14 +307,26 @@ public class TechbookService {
             throw new IllegalStateException("Este emprestimo ja foi devolvido.");
         }
 
+        Administrador administrador = garantirAdministrador(request.administradorId());
+        String estadoLivro = textoObrigatorio(request.estadoLivro(), "estado do livro");
+
         Livro livro = emprestimo.getLivro();
         // A devolucao nunca pode ultrapassar o estoque fisico cadastrado do livro.
         livro.setQuantidadeDisponivel(Math.min(livro.getQuantidadeTotal(), livro.getQuantidadeDisponivel() + 1));
         livroRepository.save(livro);
 
-        emprestimo.setAdministradorId(request.administradorId() == null ? emprestimo.getAdministradorId() : request.administradorId());
+        emprestimo.setAdministradorId(administrador.getId());
         emprestimo.setStatus("DEVOLVIDO");
-        return toEmprestimoResponse(emprestimoRepository.save(emprestimo));
+        emprestimo = emprestimoRepository.save(emprestimo);
+
+        Devolucao devolucao = new Devolucao();
+        devolucao.setEmprestimo(emprestimo);
+        devolucao.setDataDevolucao(LocalDate.now());
+        devolucao.setEstadoLivro(estadoLivro);
+        devolucao.setStatusDevolucao("REGISTRADA");
+        devolucaoRepository.save(devolucao);
+
+        return toEmprestimoResponse(emprestimo);
     }
 
     @Transactional(readOnly = true)
@@ -426,6 +451,12 @@ public class TechbookService {
             .orElseThrow(() -> new IllegalArgumentException("Emprestimo nao encontrado."));
     }
 
+    private Administrador garantirAdministrador(Long administradorId) {
+        Long id = administradorId == null ? 1L : administradorId;
+        return administradorRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Administrador nao encontrado."));
+    }
+
     private void validarLimiteEmprestimos(Long clienteId) {
         long emprestimosAtivos = emprestimoRepository.findByClienteIdOrderByIdDesc(clienteId).stream()
             .filter(emprestimo -> !"DEVOLVIDO".equals(calcularStatusEmprestimo(emprestimo)))
@@ -499,7 +530,20 @@ public class TechbookService {
             calcularStatusEmprestimo(emprestimo),
             emprestimo.isRenovado(),
             toUsuarioResponse(emprestimo.getCliente()),
-            toLivroResponse(emprestimo.getLivro())
+            toLivroResponse(emprestimo.getLivro()),
+            devolucaoRepository.findByEmprestimoId(emprestimo.getId())
+                .map(this::toDevolucaoResponse)
+                .orElse(null)
+        );
+    }
+
+    private DevolucaoResponse toDevolucaoResponse(Devolucao devolucao) {
+        return new DevolucaoResponse(
+            devolucao.getId(),
+            devolucao.getEmprestimo().getId(),
+            devolucao.getDataDevolucao(),
+            devolucao.getEstadoLivro(),
+            devolucao.getStatusDevolucao()
         );
     }
 }

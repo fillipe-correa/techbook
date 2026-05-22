@@ -227,7 +227,7 @@
     container.innerHTML = loans.map((loan) => `
       <div class="status-item">
         <strong>${app.escapeHtml(loan.cliente.nome)}</strong>
-        <p>${app.escapeHtml(loan.livro.titulo)} • empréstimo em ${app.formatDate(loan.dataEmprestimo)} • devolvido</p>
+        <p>${app.escapeHtml(loan.livro.titulo)} • devolvido em ${app.formatDate(loan.devolucao?.dataDevolucao || "")} • estado: ${app.escapeHtml(loan.devolucao?.estadoLivro || "-")}</p>
       </div>
     `).join("");
   }

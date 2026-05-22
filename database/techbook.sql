@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `administradores`
+--
+
+CREATE TABLE `administradores` (
+  `id` bigint NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `senha_hash` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `administradores`
+--
+
+INSERT INTO `administradores` (`id`, `login`, `nome`, `senha_hash`) VALUES
+(1, 'admin', 'Administrador TECHBOOK', '123456');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `emprestimos`
 --
 
@@ -45,6 +65,20 @@ CREATE TABLE `emprestimos` (
 
 INSERT INTO `emprestimos` (`id`, `administrador_id`, `data_devolucao_prevista`, `data_emprestimo`, `renovado`, `status`, `cliente_id`, `livro_id`, `reserva_id`) VALUES
 (1, 1, '2026-04-22', '2026-04-08', b'0', 'ATRASADO', 1, 3, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `devolucoes`
+--
+
+CREATE TABLE `devolucoes` (
+  `id` bigint NOT NULL,
+  `data_devolucao` date NOT NULL,
+  `estado_livro` varchar(255) NOT NULL,
+  `status_devolucao` varchar(255) NOT NULL,
+  `emprestimo_id` bigint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -138,6 +172,20 @@ INSERT INTO `usuarios` (`id`, `cpf`, `email`, `nome`, `telefone`, `senha_hash`) 
 --
 
 --
+-- Índices para tabela `administradores`
+--
+ALTER TABLE `administradores`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_administradores_login` (`login`);
+
+--
+-- Índices para tabela `devolucoes`
+--
+ALTER TABLE `devolucoes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_devolucoes_emprestimo` (`emprestimo_id`);
+
+--
 -- Índices para tabela `emprestimos`
 --
 ALTER TABLE `emprestimos`
@@ -174,6 +222,18 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de tabela `administradores`
+--
+ALTER TABLE `administradores`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `devolucoes`
+--
+ALTER TABLE `devolucoes`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `emprestimos`
 --
 ALTER TABLE `emprestimos`
@@ -200,6 +260,12 @@ ALTER TABLE `usuarios`
 --
 -- Restrições para despejos de tabelas
 --
+
+--
+-- Limitadores para a tabela `devolucoes`
+--
+ALTER TABLE `devolucoes`
+  ADD CONSTRAINT `FK_devolucoes_emprestimos` FOREIGN KEY (`emprestimo_id`) REFERENCES `emprestimos` (`id`);
 
 --
 -- Limitadores para a tabela `emprestimos`

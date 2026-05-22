@@ -1,9 +1,11 @@
 package com.techbook.config;
 
+import com.techbook.model.Administrador;
 import com.techbook.model.Emprestimo;
 import com.techbook.model.Livro;
 import com.techbook.model.Reserva;
 import com.techbook.model.Usuario;
+import com.techbook.repository.AdministradorRepository;
 import com.techbook.repository.EmprestimoRepository;
 import com.techbook.repository.LivroRepository;
 import com.techbook.repository.ReservaRepository;
@@ -21,9 +23,18 @@ public class DataInitializer {
         LivroRepository livroRepository,
         UsuarioRepository usuarioRepository,
         ReservaRepository reservaRepository,
-        EmprestimoRepository emprestimoRepository
+        EmprestimoRepository emprestimoRepository,
+        AdministradorRepository administradorRepository
     ) {
         return args -> {
+            if (administradorRepository.count() == 0) {
+                Administrador administrador = new Administrador();
+                administrador.setNome("Administrador TECHBOOK");
+                administrador.setLogin("admin");
+                administrador.setSenha("123456");
+                administradorRepository.save(administrador);
+            }
+
             // Evita recriar dados de exemplo quando o banco ja foi populado manualmente.
             if (livroRepository.count() > 0 || usuarioRepository.count() > 0) {
                 return;

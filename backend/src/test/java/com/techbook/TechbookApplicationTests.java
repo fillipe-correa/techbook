@@ -11,10 +11,13 @@ import com.techbook.dto.EmprestimoResponse;
 import com.techbook.dto.ReservaRequest;
 import com.techbook.dto.ReservaResponse;
 import com.techbook.dto.UsuarioResponse;
+import com.techbook.model.Administrador;
 import com.techbook.model.Emprestimo;
 import com.techbook.model.Livro;
 import com.techbook.model.Reserva;
 import com.techbook.model.Usuario;
+import com.techbook.repository.AdministradorRepository;
+import com.techbook.repository.DevolucaoRepository;
 import com.techbook.repository.EmprestimoRepository;
 import com.techbook.repository.LivroRepository;
 import com.techbook.repository.ReservaRepository;
@@ -44,12 +47,28 @@ class TechbookApplicationTests {
     @Autowired
     private EmprestimoRepository emprestimoRepository;
 
+    @Autowired
+    private AdministradorRepository administradorRepository;
+
+    @Autowired
+    private DevolucaoRepository devolucaoRepository;
+
+    private Long administradorId;
+
     @BeforeEach
     void limparBanco() {
+        devolucaoRepository.deleteAll();
         emprestimoRepository.deleteAll();
         reservaRepository.deleteAll();
         livroRepository.deleteAll();
         usuarioRepository.deleteAll();
+        administradorRepository.deleteAll();
+
+        Administrador administrador = new Administrador();
+        administrador.setNome("Administrador Teste");
+        administrador.setLogin("admin");
+        administrador.setSenha("123456");
+        administradorId = administradorRepository.save(administrador).getId();
     }
 
     @Test
@@ -88,7 +107,7 @@ class TechbookApplicationTests {
         Long livroId = criarLivro("Refactoring", 2).getId();
         ReservaResponse reserva = service.criarReserva(new ReservaRequest(cliente.id(), livroId));
 
-        EmprestimoResponse emprestimo = service.confirmarRetirada(new ConfirmarRetiradaRequest(reserva.id(), 1L));
+        EmprestimoResponse emprestimo = service.confirmarRetirada(new ConfirmarRetiradaRequest(reserva.id(), administradorId));
 
         assertThat(emprestimo.status()).isEqualTo("ATIVO");
         assertThat(emprestimo.dataEmprestimo()).isEqualTo(LocalDate.now());
@@ -132,10 +151,25 @@ class TechbookApplicationTests {
         livro = livroRepository.save(livro);
         Emprestimo emprestimo = salvarEmprestimo(cliente, livro, "ATIVO", false);
 
-        EmprestimoResponse devolucao = service.registrarDevolucao(new DevolucaoRequest(emprestimo.getId(), 1L, "BOM"));
+        EmprestimoResponse devolucao = service.registrarDevolucao(new DevolucaoRequest(emprestimo.getId(), administradorId, "BOM"));
 
         assertThat(devolucao.status()).isEqualTo("DEVOLVIDO");
+        assertThat(devolucao.devolucao()).isNotNull();
+        assertThat(devolucao.devolucao().dataDevolucao()).isEqualTo(LocalDate.now());
+        assertThat(devolucao.devolucao().estadoLivro()).isEqualTo("BOM");
+        assertThat(devolucao.devolucao().statusDevolucao()).isEqualTo("REGISTRADA");
+        assertThat(devolucaoRepository.findByEmprestimoId(emprestimo.getId())).isPresent();
         assertThat(livroRepository.findById(livro.getId()).orElseThrow().getQuantidadeDisponivel()).isEqualTo(1);
+    }
+
+    @Test
+    void devolucaoExigeAdministradorCadastrado() {
+        Usuario cliente = usuarioRepository.save(usuario("cliente8@techbook.local", "88888888888"));
+        Emprestimo emprestimo = salvarEmprestimo(cliente, livroRepository.save(livro("Working Effectively with Legacy Code", 1)), "ATIVO", false);
+
+        assertThatThrownBy(() -> service.registrarDevolucao(new DevolucaoRequest(emprestimo.getId(), 999L, "BOM")))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("Administrador nao encontrado");
     }
 
     @Test
@@ -183,7 +217,7 @@ class TechbookApplicationTests {
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setCliente(cliente);
         emprestimo.setLivro(livro);
-        emprestimo.setAdministradorId(1L);
+        emprestimo.setAdministradorId(administradorId);
         emprestimo.setDataEmprestimo(LocalDate.now());
         emprestimo.setDataDevolucaoPrevista(LocalDate.now().plusDays(14));
         emprestimo.setStatus(status);
