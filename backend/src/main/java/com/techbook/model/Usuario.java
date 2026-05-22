@@ -29,6 +29,6 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String cpf;
 
-    @Column
+    @Column(name = "senha_hash")
     private String senha;
 }

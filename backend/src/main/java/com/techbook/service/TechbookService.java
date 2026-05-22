@@ -22,6 +22,7 @@ import com.techbook.repository.UsuarioRepository;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -152,17 +153,17 @@ public class TechbookService {
         return toUsuarioResponse(usuario);
     }
 
-    @Transactional(readOnly = true)
     public List<ReservaResponse> listarReservas() {
+        expirarReservasVencidas();
         return reservaRepository.findAll().stream()
             .sorted(Comparator.comparing(Reserva::getId).reversed())
             .map(this::toReservaResponse)
             .toList();
     }
 
-    @Transactional(readOnly = true)
     public List<ReservaResponse> listarReservasDoCliente(Long clienteId) {
         garantirCliente(clienteId);
+        expirarReservasVencidas();
         return reservaRepository.findByClienteIdOrderByIdDesc(clienteId).stream()
             .map(this::toReservaResponse)
             .toList();
@@ -172,6 +173,8 @@ public class TechbookService {
         if (request == null || request.clienteId() == null || request.livroId() == null) {
             throw new IllegalArgumentException("Cliente e livro sao obrigatorios para criar a reserva.");
         }
+
+        expirarReservasVencidas();
 
         Usuario cliente = garantirCliente(request.clienteId());
         Livro livro = buscarLivroEntidade(request.livroId());
@@ -229,6 +232,8 @@ public class TechbookService {
         if (request == null || request.reservaId() == null) {
             throw new IllegalArgumentException("Informe a reserva para confirmar a retirada.");
         }
+
+        expirarReservasVencidas();
 
         Reserva reserva = buscarReserva(request.reservaId());
         if (!"PENDENTE".equals(reserva.getStatus())) {
@@ -321,6 +326,18 @@ public class TechbookService {
             disponiveis,
             livros.size() - disponiveis
         );
+    }
+
+    @Scheduled(cron = "0 0 * * * *")
+    public void expirarReservasVencidasAgendado() {
+        expirarReservasVencidas();
+    }
+
+    public int expirarReservasVencidas() {
+        List<Reserva> vencidas = reservaRepository.findByStatusAndPrazoRetiradaBefore("PENDENTE", LocalDate.now());
+        vencidas.forEach(reserva -> reserva.setStatus("EXPIRADA"));
+        reservaRepository.saveAll(vencidas);
+        return vencidas.size();
     }
 
     private void aplicarLivro(Livro livro, BookRequest request) {
